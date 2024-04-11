@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "GetirLite"
 include(":app")
 include(":data")
+include(":domain")
