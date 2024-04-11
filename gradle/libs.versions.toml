@@ -8,6 +8,7 @@ hilt-android-compiler = "2.48"
 hilt-android = "2.48"
 junit = "4.13.2"
 material = "1.11.0"
+kotlin = "1.9.10"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
@@ -21,3 +22,4 @@ junit = { module = "junit:junit", version.ref = "junit" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 
 [plugins]
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
