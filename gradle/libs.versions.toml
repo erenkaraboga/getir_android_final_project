@@ -8,6 +8,9 @@ hilt-android-compiler = "2.48"
 hilt-android = "2.48"
 junit = "4.13.2"
 material = "1.11.0"
+kotlin = "1.9.10"
+navigation-fragment-ktx = "2.7.7"
+navigation-ui-ktx = "2.7.7"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
@@ -19,5 +22,8 @@ hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", ve
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt-android" }
 junit = { module = "junit:junit", version.ref = "junit" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
+androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation-fragment-ktx" }
+androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation-ui-ktx" }
 
 [plugins]
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
