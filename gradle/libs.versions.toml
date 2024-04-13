@@ -11,6 +11,7 @@ material = "1.11.0"
 kotlin = "1.9.10"
 navigation-fragment-ktx = "2.7.7"
 navigation-ui-ktx = "2.7.7"
+agp = "8.2.0"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
@@ -27,3 +28,4 @@ androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation
 
 [plugins]
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
