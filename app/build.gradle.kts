@@ -52,4 +52,8 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
 
+    implementation(project(":features:basket"))
+    implementation(project(":features:product_detail"))
+    implementation(project(":features:product_list"))
+
 }
