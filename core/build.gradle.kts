@@ -18,7 +18,11 @@ android {
     }
 
     buildTypes {
+        debug{
+            buildConfigField( "String", "BASE_URL", "\"https://65c38b5339055e7482c12050.mockapi.io/\"")
+        }
         release {
+            buildConfigField( "String", "BASE_URL", "\"https://65c38b5339055e7482c12050.mockapi.io/\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -32,6 +36,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    buildFeatures{
+        viewBinding = true
+        buildConfig = true
     }
 }
 
