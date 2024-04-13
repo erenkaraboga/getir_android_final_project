@@ -15,3 +15,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "GetirLite"
 include(":app")
+include(":features")
+include(":features:product_list")
+include(":features:product_detail")
+include(":features:basket")
+include(":core")
