@@ -7,11 +7,14 @@ espresso-core = "3.5.1"
 hilt-android-compiler = "2.48"
 hilt-android = "2.48"
 junit = "4.13.2"
+logging-interceptor = "5.0.0-alpha.2"
 material = "1.11.0"
 kotlin = "1.9.10"
 navigation-fragment-ktx = "2.7.7"
 navigation-ui-ktx = "2.7.7"
 agp = "8.2.0"
+okhttp = "5.0.0-alpha.2"
+retrofit = "2.9.0"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
@@ -19,12 +22,16 @@ androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayo
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
 androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core" }
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-junit" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt-android-compiler" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt-android" }
 junit = { module = "junit:junit", version.ref = "junit" }
+logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "logging-interceptor" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation-fragment-ktx" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation-ui-ktx" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 
 [plugins]
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
