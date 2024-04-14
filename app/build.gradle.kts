@@ -35,6 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -55,5 +58,7 @@ dependencies {
     implementation(project(":features:basket"))
     implementation(project(":features:product_detail"))
     implementation(project(":features:product_list"))
+
+    implementation(project(":core"))
 
 }

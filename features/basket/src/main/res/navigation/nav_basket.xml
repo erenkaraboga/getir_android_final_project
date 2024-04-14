@@ -9,5 +9,9 @@
         android:id="@+id/basketFragment"
         android:name="com.getir.basket.BasketFragment"
         android:label="fragment_basket"
-        tools:layout="@layout/fragment_basket" />
+        tools:layout="@layout/fragment_basket" >
+
+        <deepLink
+            app:uri="android-app://example.google.app/fragment_basket" />
+    </fragment>
 </navigation>
