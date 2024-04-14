@@ -5,55 +5,77 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.net.toUri
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.fragment.findNavController
+import com.getir.core.SharedViewModel
+import com.getir.core.common.constants.ToolBarType
+import com.getir.core.common.extentions.observeInLifecycle
+import com.getir.core.common.utils.UiText
+import com.getir.core.domain.models.Product
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.getir.product_list.databinding.FragmentProductListBinding
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProductListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
 class ProductListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private lateinit var binding: FragmentProductListBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product_list, container, false)
+    ): View {
+        binding = FragmentProductListBinding.inflate(layoutInflater)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProductListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProductListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        sharedViewModel.setTopBar(ToolBarType.PRODUCT_LIST)
+        listeners()
+        setupObservers()
+        sharedViewModel.getProducts()
+
     }
+
+    private fun listeners() {
+        binding.text.setOnClickListener {
+            val request = NavDeepLinkRequest.Builder
+                .fromUri("android-app://example.google.app/fragment_product_detail".toUri())
+                .build()
+            findNavController().navigate(request)
+        }
+    }
+
+    private fun setupObservers() {
+        sharedViewModel.getViewState().observeInLifecycle(lifecycle, ::handleStateChange)
+    }
+
+    private fun handleStateChange(state: SharedViewModel.ProductViewState) {
+        when (state) {
+            is SharedViewModel.ProductViewState.Init -> Unit
+            is SharedViewModel.ProductViewState.Loading -> handleLoading(state.isLoading)
+            is SharedViewModel.ProductViewState.Success -> handleSuccess(state.data)
+            is SharedViewModel.ProductViewState.SuccessWithEmptyData -> Unit
+            is SharedViewModel.ProductViewState.Error -> handleError(state.error)
+        }
+    }
+
+    private fun handleSuccess(list: List<Product>){
+        println(list)
+    }
+
+    private fun handleLoading(loading: Boolean) {
+        //binding.progressBar.isVisible = loading
+    }
+
+    private fun handleError(error: UiText) =
+        Toast.makeText(requireContext(), error.asString(requireContext()), Toast.LENGTH_SHORT).show()
+
 }
