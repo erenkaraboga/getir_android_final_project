@@ -56,4 +56,6 @@ dependencies {
     implementation(project(":features:product_detail"))
     implementation(project(":features:product_list"))
 
+    implementation(project(":core"))
+
 }
