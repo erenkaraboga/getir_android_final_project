@@ -5,5 +5,8 @@
     <color name="color_primary">#5D3EBC</color>
     <color name="transparent">#00000000</color>
     <color name="silver">#979595</color>
+    <color name="product_item_border">#F2F0FA</color>
+    <color name="dark">#191919</color>
+    <color name="text_secondary">#697488</color>
 
 </resources>
