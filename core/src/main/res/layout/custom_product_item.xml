@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_marginTop="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvImage"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/product_item_border"
+        app:strokeWidth="1dp">
+       <ImageView
+           android:id="@+id/ivProductImage"
+       android:layout_margin="6dp"
+       android:layout_width="80dp"
+       android:layout_height="80dp">
+   </ImageView>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="0dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:textColor="@color/color_primary"
+        android:text="0,00"
+        android:layout_marginTop="10dp"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/cvImage"
+        app:layout_constraintTop_toBottomOf="@id/cvImage"
+        app:layout_constraintEnd_toEndOf="@+id/cvImage"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:id="@+id/tvProductName"
+        android:layout_width="0dp"
+        android:fontFamily="@font/open_sans_semi_bold"
+        android:textColor="@color/dark"
+        android:text="Product Name"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/cvImage"
+        app:layout_constraintTop_toBottomOf="@id/tvPrice"
+        app:layout_constraintEnd_toEndOf="@+id/cvImage"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:id="@+id/tvAttribute"
+        android:layout_width="0dp"
+        android:fontFamily="@font/open_sans_semi_bold"
+        android:textColor="@color/text_secondary"
+        android:text="Attribute"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/cvImage"
+        app:layout_constraintTop_toBottomOf="@id/tvProductName"
+        app:layout_constraintEnd_toEndOf="@+id/cvImage"
+        android:layout_height="wrap_content" />
+
+    <com.getir.core.common.ui.CustomQuantityButtonList
+        android:layout_width="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/cvImage"
+        app:layout_constraintTop_toTopOf="@id/cvImage"
+        android:layout_marginEnd="-20dp"
+        android:layout_marginTop="-20dp"
+        android:layout_height="wrap_content">
+
+    </com.getir.core.common.ui.CustomQuantityButtonList>
+</androidx.constraintlayout.widget.ConstraintLayout>
