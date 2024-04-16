@@ -62,6 +62,7 @@ class ProductListAdapter(
             binding.tvProductName.text = item.name
             binding.tvAttribute.text = item.attribute
             Glide.with(itemView.context).load(item.imageURL).into(binding.ivProductImage)
+            binding.customQuantityButton.setQuantity(item.quantity)
             binding.customQuantityButton.setOnQuantityChangeListener(object : CustomQuantityButtonList.OnQuantityChangeListener {
                 override fun onQuantityIncreased(quantity: Int) {
                     listener.onProductIncreased(quantity,product)
