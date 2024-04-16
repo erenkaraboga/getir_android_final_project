@@ -10,9 +10,16 @@ import androidx.core.net.toUri
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.getir.core.SharedViewModel
 import com.getir.core.common.constants.ToolBarType
+import com.getir.core.common.extentions.addHorizontalDecoration
+import com.getir.core.common.extentions.addSimpleVerticalDecoration
 import com.getir.core.common.extentions.observeInLifecycle
+import com.getir.core.common.ui.CustomQuantityButtonDetail
+import com.getir.core.common.ui.CustomQuantityButtonList
 import com.getir.core.common.utils.UiText
 import com.getir.core.domain.models.Product
 
@@ -26,7 +33,8 @@ class ProductListFragment : Fragment() {
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private lateinit var binding: FragmentProductListBinding
 
-
+    private lateinit var adapter: ProductListAdapter
+    private lateinit var suggestedAdapter: ProductListAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,19 +46,11 @@ class ProductListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel.setTopBar(ToolBarType.PRODUCT_LIST)
-        listeners()
+        setUpProductList()
+        setUpSuggestedProductList()
         setupObservers()
         sharedViewModel.getProducts()
-
-    }
-
-    private fun listeners() {
-        binding.text.setOnClickListener {
-            val request = NavDeepLinkRequest.Builder
-                .fromUri("android-app://example.google.app/fragment_product_detail".toUri())
-                .build()
-            findNavController().navigate(request)
-        }
+        binding.rvProduct.isNestedScrollingEnabled = false
     }
 
     private fun setupObservers() {
@@ -68,14 +68,64 @@ class ProductListFragment : Fragment() {
     }
 
     private fun handleSuccess(list: List<Product>){
-        println(list)
+       adapter.setItems(list)
+        suggestedAdapter.setItems(list)
     }
 
     private fun handleLoading(loading: Boolean) {
         //binding.progressBar.isVisible = loading
     }
+    private fun setUpProductList() {
+        binding.rvProduct.layoutManager = GridLayoutManager(
+          requireContext(),3
+        )
+        adapter = ProductListAdapter(object  : ProductItemListener{
+            override fun onProductClicked(product: Product) {
+                Toast.makeText(requireContext(), product.name, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onProductDecreased(quantity: Int,product: Product) {
+                Toast.makeText(requireContext(), "Decreased  ${product.name.take(10)} ${quantity.toString()}", Toast.LENGTH_SHORT).show()
+                sharedViewModel.decreaseCartAmount()
+
+            }
+
+            override fun onProductIncreased(quantity: Int,product: Product) {
+                Toast.makeText(requireContext(), "Increased ${product.name.take(10)} ${quantity.toString()}", Toast.LENGTH_SHORT).show()
+                sharedViewModel.increaseCartAmount()
+            }
+
+        })
+        binding.rvProduct.adapter = adapter
+    }
+    private fun setUpSuggestedProductList() {
+        binding.rvSuggestedProduct.layoutManager = LinearLayoutManager(
+            requireContext(),
+            RecyclerView.HORIZONTAL,
+            false
+        )
+        binding.rvSuggestedProduct.addHorizontalDecoration(
+            space = 0,
+            startSpace = 20,
+            endSpace = 20
+        )
+        suggestedAdapter = ProductListAdapter(object  : ProductItemListener{
+            override fun onProductClicked(product: Product) {
+
+            }
+
+            override fun onProductDecreased(quantity: Int,product: Product) {
+
+            }
+
+            override fun onProductIncreased(quantity: Int,product: Product) {
+
+            }
+
+        })
+        binding.rvSuggestedProduct.adapter = suggestedAdapter
+    }
 
     private fun handleError(error: UiText) =
         Toast.makeText(requireContext(), error.asString(requireContext()), Toast.LENGTH_SHORT).show()
-
 }

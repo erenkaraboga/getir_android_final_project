@@ -44,9 +44,13 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
         _cartAmount.value = amount
     }
 
-    fun setCartAmountNegative(amount: Int) {
+    fun increaseCartAmount() {
         val currentAmount = _cartAmount.value ?: 0
-        _cartAmount.value = currentAmount - amount
+        _cartAmount.value = currentAmount + 1
+    }
+    fun decreaseCartAmount() {
+        val currentAmount = _cartAmount.value ?: 0
+        _cartAmount.value = currentAmount - 1
     }
 
     fun shouldNavigateToBasketFragment(): Boolean {
