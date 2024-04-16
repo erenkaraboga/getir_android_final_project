@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,34 +29,51 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
         _productState.value = ProductViewState.Loading(isLoading)
     }
 
-    val cartItems = mutableListOf<Product>()
-
     private val _toolBarType = MutableLiveData<ToolBarType>()
     val toolBarType: LiveData<ToolBarType> get() = _toolBarType
 
-    private val _cartAmount = MutableLiveData(0)
-    val cartAmount: LiveData<Int> get() = _cartAmount
+    private val _cartAmount = MutableLiveData(0.0)
+    val cartAmount: LiveData<Double> get() = _cartAmount
+
 
     fun setTopBar(type: ToolBarType) {
         _toolBarType.value = type
     }
 
-    fun setCartAmount(amount: Int) {
-        _cartAmount.value = amount
+
+    private val cartItems = mutableListOf<Product>()
+
+
+    fun addToCart(product: Product) {
+        val existingProductIndex = cartItems.indexOfFirst { it.id == product.id }
+        if (existingProductIndex != -1) {
+            val existingProduct = cartItems[existingProductIndex]
+            val updatedProduct = existingProduct.copy(quantity = existingProduct.quantity + 1)
+            cartItems[existingProductIndex] = updatedProduct
+        } else {
+            cartItems.add(product.copy(quantity = 1))
+        }
+        calculateTotal()
     }
 
-    fun increaseCartAmount() {
-        val currentAmount = _cartAmount.value ?: 0
-        _cartAmount.value = currentAmount + 1
-    }
-    fun decreaseCartAmount() {
-        val currentAmount = _cartAmount.value ?: 0
-        _cartAmount.value = currentAmount - 1
+    fun removeFromCart(product: Product) {
+        val existingProductIndex = cartItems.indexOfFirst { it.id == product.id }
+        if (existingProductIndex != -1) {
+            val existingProduct = cartItems[existingProductIndex]
+            if (existingProduct.quantity > 1) {
+                val updatedProduct = existingProduct.copy(quantity = existingProduct.quantity - 1)
+                cartItems[existingProductIndex] = updatedProduct
+            } else {
+                cartItems.removeAt(existingProductIndex)
+            }
+            calculateTotal()
+        }
     }
 
-    fun shouldNavigateToBasketFragment(): Boolean {
-        val cartAmount = cartAmount.value ?: 0
-        return cartAmount > 0
+
+    private fun calculateTotal() {
+        val total = cartItems.sumOf { it.price * it.quantity }
+        _cartAmount.value = total
     }
 
     fun getProducts() {

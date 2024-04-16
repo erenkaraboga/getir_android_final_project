@@ -86,13 +86,14 @@ class ProductListFragment : Fragment() {
 
             override fun onProductDecreased(quantity: Int,product: Product) {
                 Toast.makeText(requireContext(), "Decreased  ${product.name.take(10)} ${quantity.toString()}", Toast.LENGTH_SHORT).show()
-                sharedViewModel.decreaseCartAmount()
 
+                sharedViewModel.removeFromCart(product)
             }
 
             override fun onProductIncreased(quantity: Int,product: Product) {
                 Toast.makeText(requireContext(), "Increased ${product.name.take(10)} ${quantity.toString()}", Toast.LENGTH_SHORT).show()
-                sharedViewModel.increaseCartAmount()
+                sharedViewModel.addToCart(product)
+
             }
 
         })

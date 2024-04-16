@@ -8,6 +8,7 @@ import android.view.animation.TranslateAnimation
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.getir.core.R
+import com.getir.core.common.extentions.twoDigit
 import com.google.android.material.card.MaterialCardView
 
 class CustomBasketButton @JvmOverloads constructor(
@@ -24,14 +25,14 @@ class CustomBasketButton @JvmOverloads constructor(
         root = findViewById(R.id.cvBasket)
     }
 
-    fun setAmount(amount: Int) {
+    fun setAmount(amount: Double) {
         val slideAnimation = TranslateAnimation(root.width.toFloat(), 0f, 0f, 0f)
         slideAnimation.duration = 300
         root.startAnimation(slideAnimation)
 
         slideAnimation.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation?) {
-                "₺${amount}".also { tvAmount.text = it }
+                "₺${amount.twoDigit}".also { tvAmount.text = it }
             }
 
             override fun onAnimationEnd(animation: Animation?) {}
