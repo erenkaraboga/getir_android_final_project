@@ -18,8 +18,8 @@ class CustomQuantityButtonList @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     interface OnQuantityChangeListener {
-        fun onQuantityIncreased()
-        fun onQuantityDecreased()
+        fun onQuantityIncreased(quantity : Int)
+        fun onQuantityDecreased(quantity : Int)
     }
 
     private var minusButton: ImageView
@@ -37,11 +37,15 @@ class CustomQuantityButtonList @JvmOverloads constructor(
         quantityTextView = findViewById(R.id.tvQuantity)
         quantityCard = findViewById(R.id.cvQuantity)
         minusButton.setOnClickListener {
-            quantityChangeListener?.onQuantityDecreased()
+            setQuantity(quantity - 1)
+            updateButton()
+            quantityChangeListener?.onQuantityDecreased(quantity)
         }
 
         plusButton.setOnClickListener {
-            quantityChangeListener?.onQuantityIncreased()
+            setQuantity(quantity + 1)
+            updateButton()
+            quantityChangeListener?.onQuantityIncreased(quantity)
         }
         updateButton()
     }

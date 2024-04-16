@@ -70,6 +70,7 @@
         android:layout_height="wrap_content" />
 
     <com.getir.core.common.ui.CustomQuantityButtonList
+        android:id="@+id/customQuantityButton"
         android:layout_width="wrap_content"
         app:layout_constraintEnd_toEndOf="@id/cvImage"
         app:layout_constraintTop_toTopOf="@id/cvImage"

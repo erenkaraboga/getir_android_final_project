@@ -3,14 +3,18 @@ package com.getir.product_list
 import android.annotation.SuppressLint
 import android.graphics.Movie
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.getir.core.common.ui.CustomQuantityButtonDetail
+import com.getir.core.common.ui.CustomQuantityButtonList
 import com.getir.core.databinding.CustomProductItemBinding
 import com.getir.core.domain.models.Product
 
 
 class ProductListAdapter(
+    private val listener: ProductItemListener
 
 
 ) :
@@ -26,7 +30,7 @@ class ProductListAdapter(
             false
         )
         return ViewHolder(
-            binding
+            binding,listener
         )
     }
 
@@ -46,21 +50,40 @@ class ProductListAdapter(
     }
 
 
-    inner class ViewHolder(val binding: CustomProductItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-
+    inner class ViewHolder(val binding: CustomProductItemBinding, private val listener: ProductItemListener) :
+        RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+        private lateinit var product: Product
+        init {
+            binding.root.setOnClickListener(this)
+        }
         fun bind(item: Product) {
+            this.product = item
            binding.tvPrice.text = item.priceText
             binding.tvProductName.text = item.name
             binding.tvAttribute.text = item.attribute
             Glide.with(itemView.context).load(item.imageURL).into(binding.ivProductImage)
+            binding.customQuantityButton.setOnQuantityChangeListener(object : CustomQuantityButtonList.OnQuantityChangeListener {
+                override fun onQuantityIncreased(quantity: Int) {
+                    listener.onProductIncreased(quantity,product)
 
+                }
+
+                override fun onQuantityDecreased(quantity: Int) {
+                    listener.onProductDecreased(quantity,product)
+                }
+
+            })
+        }
+
+        override fun onClick(v: View?) {
+           listener.onProductClicked(product)
         }
 
     }
 }
 
-interface MyStockAdapterListener {
-    fun onClickedItem(investmentId: String, symbol: String)
+interface ProductItemListener {
+    fun onProductClicked(product: Product)
+    fun onProductDecreased(quantity : Int , product: Product )
+    fun onProductIncreased(quantity : Int,product: Product )
 }

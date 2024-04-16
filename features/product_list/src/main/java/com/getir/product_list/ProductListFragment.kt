@@ -79,7 +79,23 @@ class ProductListFragment : Fragment() {
         binding.rvProduct.layoutManager = GridLayoutManager(
           requireContext(),3
         )
-        adapter = ProductListAdapter()
+        adapter = ProductListAdapter(object  : ProductItemListener{
+            override fun onProductClicked(product: Product) {
+                Toast.makeText(requireContext(), product.name, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onProductDecreased(quantity: Int,product: Product) {
+                Toast.makeText(requireContext(), "Decreased  ${product.name.take(10)} ${quantity.toString()}", Toast.LENGTH_SHORT).show()
+                sharedViewModel.decreaseCartAmount()
+
+            }
+
+            override fun onProductIncreased(quantity: Int,product: Product) {
+                Toast.makeText(requireContext(), "Increased ${product.name.take(10)} ${quantity.toString()}", Toast.LENGTH_SHORT).show()
+                sharedViewModel.increaseCartAmount()
+            }
+
+        })
         binding.rvProduct.adapter = adapter
     }
     private fun setUpSuggestedProductList() {
@@ -93,11 +109,23 @@ class ProductListFragment : Fragment() {
             startSpace = 20,
             endSpace = 20
         )
-        suggestedAdapter = ProductListAdapter()
+        suggestedAdapter = ProductListAdapter(object  : ProductItemListener{
+            override fun onProductClicked(product: Product) {
+
+            }
+
+            override fun onProductDecreased(quantity: Int,product: Product) {
+
+            }
+
+            override fun onProductIncreased(quantity: Int,product: Product) {
+
+            }
+
+        })
         binding.rvSuggestedProduct.adapter = suggestedAdapter
     }
 
     private fun handleError(error: UiText) =
         Toast.makeText(requireContext(), error.asString(requireContext()), Toast.LENGTH_SHORT).show()
-
 }
