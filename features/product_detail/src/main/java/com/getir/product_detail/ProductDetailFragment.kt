@@ -30,7 +30,7 @@ class ProductDetailFragment : Fragment() {
 
     private fun observeCartAmount() {
         sharedViewModel.cartAmount.observe(viewLifecycleOwner) { quantity ->
-            binding.customQuantityButton.setQuantity(quantity)
+            //binding.customQuantityButton.setQuantity(quantity)
             if (quantity > 0) {
                 showBasketUI()
             } else {
@@ -63,9 +63,7 @@ class ProductDetailFragment : Fragment() {
             }
 
         })
-        binding.btnNegative.setOnClickListener {
-            sharedViewModel.setCartAmount(1)
-        }
+
     }
 }
 

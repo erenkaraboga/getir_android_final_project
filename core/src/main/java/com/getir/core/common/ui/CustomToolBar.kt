@@ -84,7 +84,7 @@ class CustomToolBar @JvmOverloads constructor(
         })
     }
 
-    fun setAmount(amount : Int){
+    fun setAmount(amount : Double){
         btnCart.setAmount(amount)
     }
     fun setCartButtonClickListener(listener: OnClickListener) {
