@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.text.DecimalFormat
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,60 +24,80 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
     private val _productState = MutableStateFlow<ProductViewState>(ProductViewState.Init)
     fun getViewState(): StateFlow<ProductViewState> = _productState.asStateFlow()
 
-    fun setLoading(isLoading: Boolean) {
-        _productState.value = ProductViewState.Loading(isLoading)
-    }
+
+    private val _selectedProduct = MutableLiveData<Product>()
+    val selectedProduct: LiveData<Product> get() = _selectedProduct
+
 
     private val _toolBarType = MutableLiveData<ToolBarType>()
     val toolBarType: LiveData<ToolBarType> get() = _toolBarType
 
+
     private val _cartAmount = MutableLiveData(0.0)
     val cartAmount: LiveData<Double> get() = _cartAmount
 
+    var scrollPosition: Int = 0
 
     fun setTopBar(type: ToolBarType) {
         _toolBarType.value = type
     }
 
 
-    private val cartItems = mutableListOf<Product>()
+    private val _cartItems = MutableLiveData<MutableList<Product>>()
+    val cartItems: LiveData<MutableList<Product>> = _cartItems
 
+    init {
+        _cartItems.value = mutableListOf()
+    }
+    fun updateScrollPosition(position: Int) {
+        scrollPosition = position
+    }
+    fun setSelectedProduct(product: Product) {
+        _selectedProduct.value = product
+    }
 
     fun addToCart(product: Product) {
-        val existingProductIndex = cartItems.indexOfFirst { it.id == product.id }
-        if (existingProductIndex != -1) {
-            val existingProduct = cartItems[existingProductIndex]
+        val currentCartItems = _cartItems.value ?: mutableListOf()
+        val existingProductIndex = currentCartItems.indexOfFirst { it.id == product.id }
+            val existingProduct = currentCartItems[existingProductIndex]
             val updatedProduct = existingProduct.copy(quantity = existingProduct.quantity + 1)
-            cartItems[existingProductIndex] = updatedProduct
-        } else {
-            cartItems.add(product.copy(quantity = 1))
-        }
+            currentCartItems[existingProductIndex] = updatedProduct
+
+        _cartItems.value = currentCartItems
         calculateTotal()
     }
 
     fun removeFromCart(product: Product) {
-        val existingProductIndex = cartItems.indexOfFirst { it.id == product.id }
-        if (existingProductIndex != -1) {
-            val existingProduct = cartItems[existingProductIndex]
-            if (existingProduct.quantity > 1) {
-                val updatedProduct = existingProduct.copy(quantity = existingProduct.quantity - 1)
-                cartItems[existingProductIndex] = updatedProduct
-            } else {
-                cartItems.removeAt(existingProductIndex)
-            }
+        val currentCartItems = _cartItems.value ?: mutableListOf()
+        val productIndex = currentCartItems.indexOfFirst { it.id == product.id }
+
+            val existingProduct = currentCartItems[productIndex]
+            val updatedProduct = existingProduct.copy(quantity = existingProduct.quantity - 1)
+            currentCartItems[productIndex] = updatedProduct
+            _cartItems.value = currentCartItems
             calculateTotal()
-        }
+
     }
 
+    fun setCartItems(items: List<Product>) {
+        _cartItems.value = items.toMutableList()
+    }
 
     private fun calculateTotal() {
-        val total = cartItems.sumOf { it.price * it.quantity }
+        val currentCartItems = _cartItems.value ?: return
+        var total = 0.0
+        for (item in currentCartItems) {
+            total += item.price * item.quantity
+        }
         _cartAmount.value = total
+    }
+
+    private fun setLoading(isLoading: Boolean) {
+        _productState.value = ProductViewState.Loading(isLoading)
     }
 
     fun getProducts() {
         if (_productState.value is ProductViewState.Success) return
-
         viewModelScope.launch {
             getProductsUseCase.getProducts().collectLatest { result ->
                 when (result) {
@@ -86,7 +105,6 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
                         setLoading(false)
                         _productState.value = ProductViewState.Error(result.message)
                     }
-
                     is Resource.Loading -> setLoading(true)
                     is Resource.Success -> {
                         setLoading(false)
