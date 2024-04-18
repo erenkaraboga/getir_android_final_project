@@ -24,6 +24,9 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
     private val _productState = MutableStateFlow<ProductViewState>(ProductViewState.Init)
     fun getViewState(): StateFlow<ProductViewState> = _productState.asStateFlow()
 
+    private val _suggestedProductState = MutableStateFlow<SuggestedProductViewState>(SuggestedProductViewState.Init)
+    fun getSuggestedProductViewState(): StateFlow<SuggestedProductViewState> = _suggestedProductState.asStateFlow()
+
 
     private val _selectedProduct = MutableLiveData<Product>()
     val selectedProduct: LiveData<Product> get() = _selectedProduct
@@ -46,8 +49,18 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
     private val _cartItems = MutableLiveData<MutableList<Product>>()
     val cartItems: LiveData<MutableList<Product>> = _cartItems
 
+
+    private val _productItems = MutableLiveData<MutableList<Product>>()
+    val productItems: LiveData<MutableList<Product>> = _productItems
+
+
+    private val _suggestedProductItems = MutableLiveData<MutableList<Product>>()
+    val suggestedProductItems: LiveData<MutableList<Product>> = _suggestedProductItems
+
     init {
         _cartItems.value = mutableListOf()
+        _productItems.value = mutableListOf()
+        _suggestedProductItems.value = mutableListOf()
     }
     fun updateScrollPosition(position: Int) {
         scrollPosition = position
@@ -62,9 +75,9 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
             val existingProduct = currentCartItems[existingProductIndex]
             val updatedProduct = existingProduct.copy(quantity = existingProduct.quantity + 1)
             currentCartItems[existingProductIndex] = updatedProduct
-
         _cartItems.value = currentCartItems
         calculateTotal()
+        updateProductLists()
     }
 
     fun removeFromCart(product: Product) {
@@ -76,11 +89,34 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
             currentCartItems[productIndex] = updatedProduct
             _cartItems.value = currentCartItems
             calculateTotal()
+            updateProductLists()
 
     }
 
+    private fun updateProductLists() {
+        _productItems.value?.clear()
+        _suggestedProductItems.value?.clear()
+        val cartList = _cartItems.value ?: mutableListOf()
+        val productList = mutableListOf<Product>()
+        val suggestedProductList = mutableListOf<Product>()
+
+        for (product in cartList) {
+            if (product.isSuggestedItem) {
+                suggestedProductList.add(product)
+            } else {
+                productList.add(product)
+            }
+        }
+        _productItems.value = productList
+        _suggestedProductItems.value = suggestedProductList
+    }
+
+
+
     fun setCartItems(items: List<Product>) {
-        _cartItems.value = items.toMutableList()
+        val currentItems = _cartItems.value ?: mutableListOf()
+        currentItems.addAll(items)
+        _cartItems.value = currentItems
     }
 
     private fun calculateTotal() {
@@ -118,6 +154,28 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
             }
         }
     }
+    fun getSuggestedProducts() {
+        if (_suggestedProductState.value is SuggestedProductViewState.Success) return
+        viewModelScope.launch {
+            getProductsUseCase.getSuggestedProducts().collectLatest { result ->
+                when (result) {
+                    is Resource.Error -> {
+                        setLoading(false)
+                        _suggestedProductState.value = SuggestedProductViewState.Error(result.message)
+                    }
+                    is Resource.Loading -> setLoading(true)
+                    is Resource.Success -> {
+                        setLoading(false)
+                        if (result.data.isNullOrEmpty()) {
+                            _suggestedProductState.value = SuggestedProductViewState.SuccessWithEmptyData
+                        } else {
+                            _suggestedProductState.value = SuggestedProductViewState.Success(result.data)
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     sealed class ProductViewState {
         object Init : ProductViewState()
@@ -125,5 +183,12 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
         data class Success(val data: List<Product>) : ProductViewState()
         object SuccessWithEmptyData : ProductViewState()
         data class Error(val error: UiText) : ProductViewState()
+    }
+    sealed class SuggestedProductViewState {
+        object Init : SuggestedProductViewState()
+        data class Loading(val isLoading: Boolean) : SuggestedProductViewState()
+        data class Success(val data: List<Product>) : SuggestedProductViewState()
+        object SuccessWithEmptyData : SuggestedProductViewState()
+        data class Error(val error: UiText) : SuggestedProductViewState()
     }
 }
