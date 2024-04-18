@@ -112,7 +112,7 @@ class ProductListFragment : Fragment() {
     }
 
     private fun createProductListAdapter(): ProductListAdapter {
-        return ProductListAdapter(object : ProductItemListener {
+        return ProductListAdapter(requireContext(),object : ProductItemListener {
             override fun onProductClicked(product: Product) {
 
                 sharedViewModel.setSelectedProduct(product)

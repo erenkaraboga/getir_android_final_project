@@ -1,90 +1,75 @@
 package com.getir.product_list
 
-import android.annotation.SuppressLint
-import android.graphics.Movie
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.getir.core.common.ui.CustomQuantityButtonDetail
+import com.getir.core.R
+import com.getir.core.common.ui.CustomProductItem
+import com.getir.core.common.ui.CustomProductItemListener
 import com.getir.core.common.ui.CustomQuantityButtonList
 import com.getir.core.databinding.CustomProductItemBinding
 import com.getir.core.domain.models.Product
 
-
 class ProductListAdapter(
+    private val context: Context,
     private val listener: ProductItemListener
-
-
-) :
-
-    RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
 
     private val data = ArrayList<Product>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = CustomProductItemBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
-        return ViewHolder(
-            binding,listener
-        )
+        val itemView = CustomProductItem(context)
+        return ViewHolder(itemView)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     fun setItems(items: List<Product>) {
-        this.data.clear()
-        this.data.addAll(items)
+        data.clear()
+        data.addAll(items)
         notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        with(holder) { bind(item = data[position]) }
+        holder.bind(data[position])
     }
 
     override fun getItemCount(): Int {
         return data.size
     }
 
+    inner class ViewHolder(private val productItemView: CustomProductItem) :
+        RecyclerView.ViewHolder(productItemView) {
 
-    inner class ViewHolder(val binding: CustomProductItemBinding, private val listener: ProductItemListener) :
-        RecyclerView.ViewHolder(binding.root), View.OnClickListener {
-        private lateinit var product: Product
-        init {
-            binding.root.setOnClickListener(this)
-        }
         fun bind(item: Product) {
-            this.product = item
-           binding.tvPrice.text = item.priceText
-            binding.tvProductName.text = item.name
-            binding.tvAttribute.text = item.attribute
-            Glide.with(itemView.context).load(item.imageURL).into(binding.ivProductImage)
-            binding.customQuantityButton.setQuantity(item.quantity)
-            binding.customQuantityButton.setOnQuantityChangeListener(object : CustomQuantityButtonList.OnQuantityChangeListener {
-                override fun onQuantityIncreased(quantity: Int) {
-                    listener.onProductIncreased(quantity,product)
+            productItemView.setProduct(product = item)
+            productItemView.setListener(object :CustomProductItemListener{
+                override fun onQuantityIncreased(quantity: Int, product: Product) {
+                    listener.onProductIncreased(quantity , product)
 
                 }
 
-                override fun onQuantityDecreased(quantity: Int) {
-                    listener.onProductDecreased(quantity,product)
+                override fun onQuantityDecreased(quantity: Int, product: Product) {
+                    listener.onProductDecreased(quantity , product)
+
+                }
+
+                override fun onProductClicked(product: Product) {
+                   listener.onProductClicked(product)
                 }
 
             })
-        }
 
-        override fun onClick(v: View?) {
-           listener.onProductClicked(product)
-        }
 
+        }
     }
 }
 
+
 interface ProductItemListener {
     fun onProductClicked(product: Product)
-    fun onProductDecreased(quantity : Int , product: Product )
-    fun onProductIncreased(quantity : Int,product: Product )
+    fun onProductDecreased(quantity: Int, product: Product)
+    fun onProductIncreased(quantity: Int, product: Product)
 }
