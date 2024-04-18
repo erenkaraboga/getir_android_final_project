@@ -13,13 +13,14 @@ class ProductMapper {
         Product(
             id = id,
             attribute = if (!attribute.isNullOrEmpty()) attribute else EMPTY_STRING,
-           imageURL = imageURL,
+           imageURL = if (!imageURL.isNullOrEmpty()) imageURL else EMPTY_STRING,
             name = name,
             price = price,
             priceText = priceText,
             shortDescription = if (!shortDescription.isNullOrEmpty()) shortDescription else EMPTY_STRING,
-            thumbnailURL = thumbnailURL,
-
+            thumbnailURL = if (!thumbnailURL.isNullOrEmpty()) thumbnailURL else EMPTY_STRING,
+            squareThumbnailURL = if (!squareThumbnailURL.isNullOrEmpty()) squareThumbnailURL else EMPTY_STRING,
+            isSuggestedItem = isSuggestedProduct
         )
     }
 

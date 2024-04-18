@@ -14,4 +14,8 @@ class ProductRepositoryImpl @Inject constructor(
         return api.getProducts()
     }
 
+    override suspend fun getSuggestedProducts(): ProductListResponseDto {
+      return api.getSuggestedProducts()
+    }
+
 }

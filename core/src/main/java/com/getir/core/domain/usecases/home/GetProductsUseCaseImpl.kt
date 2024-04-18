@@ -26,7 +26,23 @@ class GetProductsUseCaseImpl @Inject constructor(
             emit(Resource.Loading())
 
             val response = repository.getProducts().first().products
+
             emit(Resource.Success(data = response.map(mapper::fromDtoToDomain)))
+        } catch (e: HttpException) {
+            emit(Resource.Error(e.handleError()))
+        } catch (e: IOException) {
+            emit(Resource.Error(UiText.StringResource(R.string.couldntReachServerError)))
+        }
+    }
+
+    override suspend fun getSuggestedProducts(): Flow<Resource<List<Product>>> = flow {
+        try {
+            emit(Resource.Loading())
+            val response = repository.getSuggestedProducts().first().products
+            val updatedProducts = response.map { product ->
+                    product.copy(isSuggestedProduct = true)
+            }
+            emit(Resource.Success(data = updatedProducts.map(mapper::fromDtoToDomain)))
         } catch (e: HttpException) {
             emit(Resource.Error(e.handleError()))
         } catch (e: IOException) {

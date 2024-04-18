@@ -9,5 +9,7 @@ data class Product(
     val priceText: String,
     val shortDescription: String,
     val thumbnailURL: String,
-    var quantity: Int = 0
+    var quantity: Int = 0,
+    val squareThumbnailURL: String,
+    val isSuggestedItem: Boolean = false,
 )

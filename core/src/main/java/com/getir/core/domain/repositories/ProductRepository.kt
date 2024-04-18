@@ -5,4 +5,5 @@ import com.getir.core.data.remote.models.response.ProductListResponseDto
 
 interface ProductRepository {
     suspend fun getProducts(): ProductListResponseDto
+    suspend fun getSuggestedProducts(): ProductListResponseDto
 }
