@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
 import com.getir.core.SharedViewModel
 import com.getir.core.common.constants.ToolBarType
 import com.getir.core.common.ui.CustomQuantityButtonDetail
+import com.getir.core.domain.extensions.getImageUrl
 import com.getir.core.domain.models.Product
 import com.getir.product_detail.databinding.FragmentProductDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,7 +48,12 @@ class ProductDetailFragment : Fragment() {
         sharedViewModel.selectedProduct.observe(viewLifecycleOwner) { selectedProduct ->
             selectedProduct?.let {
                 product = it
-                binding.tvProduct.text = it.name
+                binding.tvProductName.text = it.name
+                binding.tvAttribute.text = it.attribute
+                binding.tvPrice.text = it.priceText
+                Glide.with(this)
+                    .load(product.getImageUrl())
+                    .into(binding.ivProductImage)
             }
         }
     }
@@ -73,6 +80,7 @@ class ProductDetailFragment : Fragment() {
                 sharedViewModel.removeFromCart(product)
             }
         })
+
         binding.btnNegative.setOnClickListener {
             sharedViewModel.addToCart(product)
             binding.customQuantityButton.setQuantity(1)
