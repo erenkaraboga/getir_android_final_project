@@ -1,17 +1,11 @@
 package com.getir.product_list
 
 import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.getir.core.R
+import com.getir.basket.ProductItemListener
 import com.getir.core.common.ui.CustomProductItem
 import com.getir.core.common.ui.CustomProductItemListener
-import com.getir.core.common.ui.CustomQuantityButtonList
-import com.getir.core.databinding.CustomProductItemBinding
 import com.getir.core.domain.models.Product
 
 class ProductListAdapter(

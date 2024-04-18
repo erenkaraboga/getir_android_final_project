@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.getir.basket.ProductItemListener
 import com.getir.core.SharedViewModel
 import com.getir.core.common.constants.ToolBarType
 import com.getir.core.common.extentions.addHorizontalDecoration
