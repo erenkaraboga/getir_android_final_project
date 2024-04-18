@@ -51,13 +51,22 @@ class CustomProductItem @JvmOverloads constructor(
     }
     private fun updateProduct() {
         Glide.with(context)
-            .load(product.imageURL)
+            .load(getImageUrl())
             .into(imageView)
         priceTextView.text = product.priceText
         productNameTextView.text = product.name
         attributeTextView.text = product.attribute
         customQuantityButtonList.setQuantity(product.quantity)
         cardView.strokeColor = if (product.quantity > 0) primaryColor else borderColor
+    }
+
+    private fun getImageUrl(): String {
+        return when {
+            product.imageURL.isNotEmpty() -> product.imageURL
+            product.thumbnailURL.isNotEmpty() ->  product.thumbnailURL
+            product.squareThumbnailURL.isNotEmpty() -> product.squareThumbnailURL
+            else -> ""
+        }
     }
 
 
