@@ -55,4 +55,7 @@ dependencies {
     kapt(libs.hilt.android.compiler)
 
 
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+
+
 }
