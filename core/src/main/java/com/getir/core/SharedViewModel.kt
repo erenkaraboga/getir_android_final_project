@@ -94,8 +94,7 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
     }
 
     private fun updateProductLists() {
-        _productItems.value?.clear()
-        _suggestedProductItems.value?.clear()
+
         val cartList = _cartItems.value ?: mutableListOf()
         val productList = mutableListOf<Product>()
         val suggestedProductList = mutableListOf<Product>()
@@ -117,6 +116,7 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
         val currentItems = _cartItems.value ?: mutableListOf()
         currentItems.addAll(items)
         _cartItems.value = currentItems
+        updateProductLists()
     }
 
     private fun calculateTotal() {
