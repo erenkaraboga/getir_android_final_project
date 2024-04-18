@@ -57,10 +57,14 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
     private val _suggestedProductItems = MutableLiveData<MutableList<Product>>()
     val suggestedProductItems: LiveData<MutableList<Product>> = _suggestedProductItems
 
+    private val _basketItems = MutableLiveData<MutableList<Product>>()
+    val basketItems: LiveData<MutableList<Product>> = _basketItems
+
     init {
         _cartItems.value = mutableListOf()
         _productItems.value = mutableListOf()
         _suggestedProductItems.value = mutableListOf()
+        _basketItems.value = mutableListOf()
     }
     fun updateScrollPosition(position: Int) {
         scrollPosition = position
@@ -90,15 +94,12 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
             _cartItems.value = currentCartItems
             calculateTotal()
             updateProductLists()
-
     }
 
     private fun updateProductLists() {
-
         val cartList = _cartItems.value ?: mutableListOf()
         val productList = mutableListOf<Product>()
         val suggestedProductList = mutableListOf<Product>()
-
         for (product in cartList) {
             if (product.isSuggestedItem) {
                 suggestedProductList.add(product)
@@ -108,9 +109,21 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
         }
         _productItems.value = productList
         _suggestedProductItems.value = suggestedProductList
+        getBasketItems()
+
     }
 
 
+
+    private fun getBasketItems()  {
+        val basketItems = mutableListOf<Product>()
+        _cartItems.value?.forEach { product ->
+            if (product.quantity > 0) {
+                basketItems.add(product)
+            }
+            _basketItems.value = basketItems
+        }
+    }
 
     fun setCartItems(items: List<Product>) {
         val currentItems = _cartItems.value ?: mutableListOf()
