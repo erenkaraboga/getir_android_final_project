@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:background="@color/white"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/product_item_border"
+        app:strokeWidth="1dp">
+        <ImageView
+            android:id="@+id/ivProductImage"
+            android:layout_margin="6dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp">
+        </ImageView>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="0dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:textColor="@color/color_primary"
+        android:text="0,00"
+        android:textSize="14sp"
+        android:layout_marginStart="6dp"
+
+        app:layout_constraintBottom_toBottomOf="@id/cvImage"
+        app:layout_constraintStart_toEndOf="@+id/cvImage"
+       app:layout_constraintTop_toBottomOf="@+id/tvAttribute"
+
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:id="@+id/tvProductName"
+        android:layout_width="0dp"
+        android:fontFamily="@font/open_sans_semi_bold"
+        android:textColor="@color/dark"
+        android:text="Product Name"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="6dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvAttribute"
+        app:layout_constraintEnd_toStartOf="@+id/customQuantityButton"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/cvImage"
+        app:layout_constraintTop_toTopOf="@id/cvImage"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:id="@+id/tvAttribute"
+        android:layout_width="0dp"
+        android:fontFamily="@font/open_sans_semi_bold"
+        android:textColor="@color/text_secondary"
+        android:text="Attribute"
+        app:layout_constraintBottom_toTopOf="@+id/tvPrice"
+        android:textSize="12sp"
+        android:layout_marginStart="6dp"
+        app:layout_constraintStart_toEndOf="@+id/cvImage"
+        app:layout_constraintTop_toBottomOf="@id/tvProductName"
+        android:layout_height="wrap_content" />
+
+    <com.getir.core.common.ui.CustomQuantityButtonBasket
+        android:id="@+id/customQuantityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cvImage"
+        app:layout_constraintBottom_toBottomOf="@id/cvImage">
+
+    </com.getir.core.common.ui.CustomQuantityButtonBasket>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:dividerColor="@color/product_item_border"
+        app:layout_constraintTop_toBottomOf="@id/cvImage"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_height="wrap_content">
+    </com.google.android.material.divider.MaterialDivider>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
