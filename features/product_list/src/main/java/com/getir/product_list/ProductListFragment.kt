@@ -32,7 +32,7 @@ class ProductListFragment : Fragment() {
     private lateinit var productList: RecyclerView
     private lateinit var suggestedProductList: RecyclerView
     private lateinit var productAdapter: ProductListAdapter
-    private lateinit var suggestedAdapter: ProductListAdapter
+    private lateinit var suggestedAdapter: ProductSuggestedListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,12 +49,13 @@ class ProductListFragment : Fragment() {
         setUpSuggestedProductList()
         listeners()
         setupObservers()
-        sharedViewModel.getProducts()
+        init()
         binding.rvProduct.isNestedScrollingEnabled = false
     }
 
     private fun setupObservers() {
         sharedViewModel.getViewState().observeInLifecycle(lifecycle, ::handleStateChange)
+        sharedViewModel.getSuggestedProductViewState().observeInLifecycle(lifecycle, ::handleStateChangeSuggested)
     }
 
     private fun handleStateChange(state: SharedViewModel.ProductViewState) {
@@ -65,11 +66,30 @@ class ProductListFragment : Fragment() {
             else -> Unit
         }
     }
+    private fun handleStateChangeSuggested(state: SharedViewModel.SuggestedProductViewState) {
+        when (state) {
+            is SharedViewModel.SuggestedProductViewState.Success -> handleSuccessSuggested(state.data)
+            is SharedViewModel.SuggestedProductViewState.Error -> handleError(state.error)
+            is SharedViewModel.SuggestedProductViewState.Loading -> handleLoading(state.isLoading)
+            else -> Unit
+        }
+    }
 
+    private fun init(){
+        sharedViewModel.cartItems.value?.takeIf { it.isEmpty() }?.run {
+            sharedViewModel.getProducts()
+            sharedViewModel.getSuggestedProducts()
+        }
+    }
     private fun handleSuccess(list: List<Product>) {
-        if (sharedViewModel.cartItems.value?.isEmpty() == true) {
+        sharedViewModel.productItems.value?.takeIf { it.isEmpty() }?.run {
             sharedViewModel.setCartItems(list)
             productAdapter.setItems(list)
+        }
+    }
+    private fun handleSuccessSuggested(list: List<Product>) {
+        sharedViewModel.suggestedProductItems.value?.takeIf { it.isEmpty() }?.run {
+            sharedViewModel.setCartItems(list)
             suggestedAdapter.setItems(list)
         }
     }
@@ -98,13 +118,15 @@ class ProductListFragment : Fragment() {
             false
         )
         suggestedProductList.addHorizontalDecoration(space = 0, startSpace = 20, endSpace = 20)
-        suggestedAdapter = createProductListAdapter()
+        suggestedAdapter = createSuggestedProductListAdapter()
         suggestedProductList.adapter = suggestedAdapter
     }
 
     override fun onResume() {
-        sharedViewModel.cartItems.value?.let { productAdapter.setItems(it) }
-        sharedViewModel.cartItems.value?.let { suggestedAdapter.setItems(it) }
+        //to refresh recyclerviews for change and scroll older position
+
+        sharedViewModel.productItems.value?.let { productAdapter.setItems(it) }
+        sharedViewModel.suggestedProductItems.value?.let { suggestedAdapter.setItems(it) }
         binding.nestedScroll.post {
             binding.nestedScroll.scrollTo(0, sharedViewModel.scrollPosition)
         }
@@ -114,7 +136,25 @@ class ProductListFragment : Fragment() {
     private fun createProductListAdapter(): ProductListAdapter {
         return ProductListAdapter(requireContext(),object : ProductItemListener {
             override fun onProductClicked(product: Product) {
+                sharedViewModel.setSelectedProduct(product)
 
+                val deepLinkUri = "android-app://example.google.app/fragment_product_detail".toUri()
+                val request = NavDeepLinkRequest.Builder.fromUri(deepLinkUri).build()
+                findNavController().navigate(request)
+            }
+
+            override fun onProductDecreased(quantity: Int, product: Product) {
+                sharedViewModel.removeFromCart(product)
+            }
+
+            override fun onProductIncreased(quantity: Int, product: Product) {
+                sharedViewModel.addToCart(product)
+            }
+        })
+    }
+    private fun createSuggestedProductListAdapter(): ProductSuggestedListAdapter {
+        return ProductSuggestedListAdapter(requireContext(),object : ProductSuggestedItemListener {
+            override fun onProductClicked(product: Product) {
                 sharedViewModel.setSelectedProduct(product)
                 val deepLinkUri = "android-app://example.google.app/fragment_product_detail".toUri()
                 val request = NavDeepLinkRequest.Builder.fromUri(deepLinkUri).build()

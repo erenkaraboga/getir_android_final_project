@@ -75,6 +75,7 @@ class ProductDetailFragment : Fragment() {
         })
         binding.btnNegative.setOnClickListener {
             sharedViewModel.addToCart(product)
+            binding.customQuantityButton.setQuantity(1)
         }
     }
 }

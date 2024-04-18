@@ -10,14 +10,12 @@ import com.bumptech.glide.Glide
 import com.getir.core.R
 import com.getir.core.common.ui.CustomProductItem
 import com.getir.core.common.ui.CustomProductItemListener
-import com.getir.core.common.ui.CustomQuantityButtonList
-import com.getir.core.databinding.CustomProductItemBinding
 import com.getir.core.domain.models.Product
 
-class ProductListAdapter(
+class ProductSuggestedListAdapter(
     private val context: Context,
-    private val listener: ProductItemListener
-) : RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
+    private val listener: ProductSuggestedItemListener
+) : RecyclerView.Adapter<ProductSuggestedListAdapter.ViewHolder>() {
 
     private val data = ArrayList<Product>()
 
@@ -44,31 +42,31 @@ class ProductListAdapter(
         RecyclerView.ViewHolder(productItemView) {
 
         fun bind(item: Product) {
+            productItemView.setProduct(product = item)
+            productItemView.setListener(object :CustomProductItemListener{
+                override fun onQuantityIncreased(quantity: Int, product: Product) {
+                    listener.onProductIncreased(quantity , product)
 
-                productItemView.setProduct(product = item)
-                productItemView.setListener(object :CustomProductItemListener{
-                    override fun onQuantityIncreased(quantity: Int, product: Product) {
-                        listener.onProductIncreased(quantity , product)
+                }
 
-                    }
+                override fun onQuantityDecreased(quantity: Int, product: Product) {
+                    listener.onProductDecreased(quantity , product)
 
-                    override fun onQuantityDecreased(quantity: Int, product: Product) {
-                        listener.onProductDecreased(quantity , product)
+                }
 
-                    }
+                override fun onProductClicked(product: Product) {
+                    listener.onProductClicked(product)
+                }
 
-                    override fun onProductClicked(product: Product) {
-                        listener.onProductClicked(product)
-                    }
+            })
 
-                })
-            }
 
+        }
     }
 }
 
 
-interface ProductItemListener {
+interface ProductSuggestedItemListener {
     fun onProductClicked(product: Product)
     fun onProductDecreased(quantity: Int, product: Product)
     fun onProductIncreased(quantity: Int, product: Product)
