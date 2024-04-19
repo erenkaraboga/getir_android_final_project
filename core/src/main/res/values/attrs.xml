@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="custom_order_button">
+        <attr name="isBasket" format="boolean"/>
+        <attr name="customButtonText" format="string"/>
+    </declare-styleable>
+</resources>
+
+
