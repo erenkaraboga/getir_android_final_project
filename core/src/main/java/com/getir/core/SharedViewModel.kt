@@ -41,9 +41,9 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
 
     var scrollPosition: Int = 0
 
-    fun setTopBar(type: ToolBarType) {
-        _toolBarType.value = type
-    }
+    private val _isOrdered = MutableLiveData<Boolean>()
+    val isOrdered: LiveData<Boolean> get() = _isOrdered
+
 
 
     private val _cartItems = MutableLiveData<MutableList<Product>>()
@@ -65,6 +65,7 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
         _productItems.value = mutableListOf()
         _suggestedProductItems.value = mutableListOf()
         _basketItems.value = mutableListOf()
+        _isOrdered.value = false
     }
     fun updateScrollPosition(position: Int) {
         scrollPosition = position
@@ -139,6 +140,15 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
             total += item.price * item.quantity
         }
         _cartAmount.value = total
+    }
+
+    fun setTopBar(type: ToolBarType) {
+        _toolBarType.value = type
+    }
+
+    fun setIsOrdered(ordered: Boolean) {
+        _isOrdered.value = ordered
+        _isOrdered.value=false
     }
 
     private fun setLoading(isLoading: Boolean) {
