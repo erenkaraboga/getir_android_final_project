@@ -8,6 +8,7 @@ import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import com.getir.core.R
 import com.getir.core.common.extentions.twoDigit
 import com.google.android.material.card.MaterialCardView
@@ -21,11 +22,17 @@ class CustomOrderButton @JvmOverloads constructor(
     private val orderLayout: LinearLayout
     private val buttonText: TextView
     private val tvPrice: TextView
+    private val cvOrder: CardView
+    private var buttonClickedListener: ButtonClickedListener? = null
     init {
         LayoutInflater.from(context).inflate(R.layout.custom_order_button, this, true)
-        orderLayout = findViewById(R.id.cvPrice2)
+        orderLayout = findViewById(R.id.cvPrice)
         buttonText = findViewById(R.id.tvText)
         tvPrice= findViewById(R.id.tvPrice)
+        cvOrder= findViewById(R.id.cvOrder)
+        cvOrder.setOnClickListener{
+            buttonClickedListener?.onButtonClicked()
+        }
         attrs?.let { retrieveAttributes(attrs) }
     }
 
@@ -46,4 +53,11 @@ class CustomOrderButton @JvmOverloads constructor(
       fun setAmount(amount : Double){
         "₺${amount.twoDigit}".also { tvPrice.text = it }
     }
+    fun setButtonClickListener(listener: ButtonClickedListener) {
+        buttonClickedListener = listener
+    }
+    interface ButtonClickedListener {
+        fun onButtonClicked()
+    }
+
 }

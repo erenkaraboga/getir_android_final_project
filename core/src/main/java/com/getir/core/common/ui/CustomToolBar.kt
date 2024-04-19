@@ -93,4 +93,7 @@ class CustomToolBar @JvmOverloads constructor(
     fun setCloseButtonClickListener(listener: OnClickListener) {
         btnClose.setOnClickListener(listener)
     }
+    fun setDeleteButtonClickListener(listener: OnClickListener) {
+        btnJunk.setOnClickListener(listener)
+    }
 }
