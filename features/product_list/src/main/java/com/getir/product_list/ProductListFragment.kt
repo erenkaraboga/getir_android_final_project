@@ -71,7 +71,7 @@ class ProductListFragment : Fragment() {
         when (state) {
             is SharedViewModel.SuggestedProductViewState.Success -> handleSuccessSuggested(state.data)
             is SharedViewModel.SuggestedProductViewState.Error -> handleError(state.error)
-            is SharedViewModel.SuggestedProductViewState.Loading -> handleLoading(state.isLoading)
+            is SharedViewModel.SuggestedProductViewState.Loading -> handleLoadingSuggested(state.isLoading)
             else -> Unit
         }
     }
@@ -101,7 +101,30 @@ class ProductListFragment : Fragment() {
         })
     }
     private fun handleLoading(loading: Boolean) {
-        binding.progress.isVisible = loading
+        if(loading){
+            binding.rvProduct.visibility  = View.GONE
+            binding.shimmerProductList.visibility = View.VISIBLE
+            binding.shimmerProductList.startShimmer()
+
+            binding.rvSuggestedProduct.visibility = View.GONE
+            binding.shimmerSuggested.visibility = View.VISIBLE
+            binding.shimmerSuggested.startShimmer()
+
+        }
+        else{
+            binding.shimmerProductList.visibility = View.GONE
+            binding.shimmerProductList.stopShimmer()
+            binding.rvProduct.visibility  = View.VISIBLE
+
+            binding.shimmerSuggested.visibility = View.GONE
+            binding.shimmerSuggested.stopShimmer()
+            binding.rvSuggestedProduct.visibility = View.VISIBLE
+
+        }
+    }
+    private fun handleLoadingSuggested(loading: Boolean) {
+
+
     }
 
     private fun setUpProductList() {

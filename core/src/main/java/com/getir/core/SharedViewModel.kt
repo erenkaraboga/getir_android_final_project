@@ -143,6 +143,11 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
 
     private fun setLoading(isLoading: Boolean) {
         _productState.value = ProductViewState.Loading(isLoading)
+
+    }
+    private fun setLoadingSuggested(isLoading: Boolean) {
+        _suggestedProductState.value = SuggestedProductViewState.Loading(isLoading)
+
     }
 
     fun getProducts() {
@@ -173,12 +178,12 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
             getProductsUseCase.getSuggestedProducts().collectLatest { result ->
                 when (result) {
                     is Resource.Error -> {
-                        setLoading(false)
+                        setLoadingSuggested(false)
                         _suggestedProductState.value = SuggestedProductViewState.Error(result.message)
                     }
-                    is Resource.Loading -> setLoading(true)
+                    is Resource.Loading -> setLoadingSuggested(true)
                     is Resource.Success -> {
-                        setLoading(false)
+                        setLoadingSuggested(false)
                         if (result.data.isNullOrEmpty()) {
                             _suggestedProductState.value = SuggestedProductViewState.SuccessWithEmptyData
                         } else {
