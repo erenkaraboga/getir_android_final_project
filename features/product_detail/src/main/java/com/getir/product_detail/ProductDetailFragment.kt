@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.getir.core.SharedViewModel
 import com.getir.core.common.constants.ToolBarType
+import com.getir.core.common.ui.CustomOrderButton
 import com.getir.core.common.ui.CustomQuantityButtonDetail
 import com.getir.core.domain.extensions.getImageUrl
 import com.getir.core.domain.models.Product
@@ -61,13 +62,13 @@ class ProductDetailFragment : Fragment() {
     private fun showBasketUI() {
         sharedViewModel.setTopBar(ToolBarType.PRODUCT_DETAIL_BASKET)
         binding.customQuantityButton.visibility = View.VISIBLE
-        binding.btnNegative.visibility = View.GONE
+        binding.btnCart.visibility = View.GONE
     }
 
     private fun showRegularUI() {
         sharedViewModel.setTopBar(ToolBarType.PRODUCT_DETAIL)
         binding.customQuantityButton.visibility = View.GONE
-        binding.btnNegative.visibility = View.VISIBLE
+        binding.btnCart.visibility = View.VISIBLE
     }
 
     private fun setListeners() {
@@ -80,10 +81,12 @@ class ProductDetailFragment : Fragment() {
                 sharedViewModel.removeFromCart(product)
             }
         })
+        binding.btnCart.setButtonClickListener(object: CustomOrderButton.ButtonClickedListener{
+            override fun onButtonClicked() {
+                sharedViewModel.addToCart(product)
+                binding.customQuantityButton.setQuantity(1)
+            }
 
-        binding.btnNegative.setOnClickListener {
-            sharedViewModel.addToCart(product)
-            binding.customQuantityButton.setQuantity(1)
-        }
+        })
     }
 }

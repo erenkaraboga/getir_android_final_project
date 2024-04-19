@@ -8,15 +8,18 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.getir.basket.databinding.FragmentBasketBinding
 import com.getir.core.SharedViewModel
+import com.getir.core.common.constants.NavigationRoute
 import com.getir.core.common.constants.ToolBarType
 import com.getir.core.common.extentions.addHorizontalDecoration
 import com.getir.core.common.extentions.addSimpleVerticalDecoration
+import com.getir.core.common.ui.CustomOrderButton
 import com.getir.core.domain.extensions.getImageUrl
 import com.getir.core.domain.models.Product
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,6 +50,7 @@ class BasketFragment : Fragment() {
         setUpProductList()
         setUpSuggestedProductList()
         setObservers()
+        setListeners()
         sharedViewModel.basketItems.value?.let { productAdapter.setItems(it) }
         sharedViewModel.suggestedProductItems.value?.let { suggestedAdapter.setItems(it) }
     }
@@ -64,9 +68,17 @@ class BasketFragment : Fragment() {
         }
         sharedViewModel.cartAmount.observe(viewLifecycleOwner) { amount ->
             amount?.let {
-                binding.btnNegative.setAmount(it)
+                binding.btnCart.setAmount(it)
             }
         }
+    }
+    private  fun setListeners(){
+        binding.btnCart.setButtonClickListener(object: CustomOrderButton.ButtonClickedListener{
+            override fun onButtonClicked() {
+              sharedViewModel.setIsOrdered(true)
+            }
+
+        })
     }
     private fun setUpProductList() {
         productList = binding.rvProduct
@@ -102,9 +114,7 @@ class BasketFragment : Fragment() {
         return ProductSuggestedListAdapter(requireContext(),object : ProductSuggestedItemListener {
             override fun onProductClicked(product: Product) {
                 sharedViewModel.setSelectedProduct(product)
-                val deepLinkUri = "android-app://example.google.app/fragment_product_detail".toUri()
-                val request = NavDeepLinkRequest.Builder.fromUri(deepLinkUri).build()
-                findNavController().navigate(request)
+               navigateToProductDetail()
             }
 
             override fun onProductDecreased(quantity: Int, product: Product) {
@@ -124,10 +134,7 @@ class BasketFragment : Fragment() {
         return BasketListAdapter(requireContext(),object : ProductItemListener {
             override fun onProductClicked(product: Product) {
                 sharedViewModel.setSelectedProduct(product)
-
-                val deepLinkUri = "android-app://example.google.app/fragment_product_detail".toUri()
-                val request = NavDeepLinkRequest.Builder.fromUri(deepLinkUri).build()
-                findNavController().navigate(request)
+                navigateToProductDetail()
             }
 
             override fun onProductDecreased(quantity: Int, product: Product) {
@@ -138,6 +145,17 @@ class BasketFragment : Fragment() {
                 sharedViewModel.addToCart(product)
             }
         })
+    }
+
+    private fun navigateToProductDetail() {
+
+        val navOptions = NavOptions.Builder()
+            .setEnterAnim(com.getir.core.R.anim.slide_in)
+            .setPopEnterAnim(com.getir.core.R.anim.fade_in)
+            .build()
+        val deepLinkUri = NavigationRoute.PRODUCT_DETAIL.toUri()
+        val request = NavDeepLinkRequest.Builder.fromUri(deepLinkUri).build()
+        findNavController().navigate(request, navOptions)
     }
 
 }
