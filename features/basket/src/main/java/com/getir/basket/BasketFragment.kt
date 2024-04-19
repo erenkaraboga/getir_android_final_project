@@ -62,6 +62,11 @@ class BasketFragment : Fragment() {
                 suggestedAdapter.setItems(list)
             }
         }
+        sharedViewModel.cartAmount.observe(viewLifecycleOwner) { amount ->
+            amount?.let {
+                binding.btnNegative.setAmount(it)
+            }
+        }
     }
     private fun setUpProductList() {
         productList = binding.rvProduct
@@ -72,7 +77,7 @@ class BasketFragment : Fragment() {
         )
 
         productList.addSimpleVerticalDecoration(
-            12,
+            18,
             includeFirstItem = true,
             includeLastItem = false
 
@@ -89,7 +94,7 @@ class BasketFragment : Fragment() {
             RecyclerView.HORIZONTAL,
             false
         )
-        suggestedProductList.addHorizontalDecoration(space = 0, startSpace = 20, endSpace = 20)
+        suggestedProductList.addHorizontalDecoration(space = 10, startSpace = 20, endSpace = 20)
         suggestedAdapter = createSuggestedProductListAdapter()
         suggestedProductList.adapter = suggestedAdapter
     }
@@ -107,6 +112,9 @@ class BasketFragment : Fragment() {
             }
 
             override fun onProductIncreased(quantity: Int, product: Product) {
+                binding.nestedScroll.post{
+                    binding.nestedScroll.fullScroll(View.FOCUS_DOWN)
+                }
                 sharedViewModel.addToCart(product)
             }
         })
