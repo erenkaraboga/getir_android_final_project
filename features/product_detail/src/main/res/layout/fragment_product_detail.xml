@@ -102,7 +102,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <com.getir.core.common.ui.CustomOrderButton
-            android:id="@+id/btn_negative"
+            android:id="@+id/btnCart"
             android:layout_width="match_parent"
             app:cardCornerRadius="0dp"
             android:layout_marginHorizontal="20dp"
