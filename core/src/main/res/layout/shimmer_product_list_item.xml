@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_marginTop="10dp"
+    android:paddingHorizontal="18dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvImage"
+        android:layout_width="80dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="80dp"
+        app:cardBackgroundColor="@color/french_gray"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/product_item_border"
+        app:strokeWidth="1dp">
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+
+        android:id="@+id/tvPrice"
+        android:layout_width="0dp"
+        android:layout_marginTop="10dp"
+        app:cardElevation="0dp"
+       app:strokeWidth="0dp"
+        app:cardBackgroundColor="@color/french_gray"
+        app:layout_constraintStart_toStartOf="@+id/cvImage"
+        app:layout_constraintTop_toBottomOf="@id/cvImage"
+        app:layout_constraintEnd_toEndOf="@+id/cvImage"
+        android:layout_height="20dp"
+        />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/tvProductName"
+        android:layout_width="0dp"
+        app:cardBackgroundColor="@color/french_gray"
+        app:cardElevation="0dp"
+        app:strokeWidth="0dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="@+id/cvImage"
+        app:layout_constraintTop_toBottomOf="@id/tvPrice"
+        app:layout_constraintEnd_toEndOf="@+id/cvImage"
+        android:layout_height="20dp"
+        />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/tvAttribute"
+        android:layout_width="40dp"
+        app:cardBackgroundColor="@color/french_gray"
+        app:cardElevation="0dp"
+        app:strokeWidth="0dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="@+id/cvImage"
+        app:layout_constraintTop_toBottomOf="@id/tvProductName"
+
+        android:layout_height="20dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
