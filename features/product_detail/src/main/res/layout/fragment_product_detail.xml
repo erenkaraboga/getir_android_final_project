@@ -70,6 +70,8 @@
         android:layout_height="wrap_content" />
 
 
+
+
     <com.getir.core.common.ui.CustomQuantityButtonDetail
         android:id="@+id/customQuantityButton"
         android:layout_width="wrap_content"
@@ -82,18 +84,38 @@
 
     </com.getir.core.common.ui.CustomQuantityButtonDetail>
 
-    <Button
-        android:id="@+id/btn_negative"
-        android:layout_gravity="center"
-        android:text="Sepete Ekle"
-        app:layout_constraintStart_toStartOf="parent"
+    <View
+        android:id="@+id/shadowView"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:background="@drawable/custom_shadow"
+        app:layout_constraintBottom_toTopOf="@+id/cvButton"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="20dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </Button>
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.getir.core.common.ui.CustomOrderButton
+            android:id="@+id/btn_negative"
+            android:layout_width="match_parent"
+            app:cardCornerRadius="0dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            app:customButtonText = "Sepete Ekle"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            app:isBasket="false"
+            android:layout_height="wrap_content">
+
+        </com.getir.core.common.ui.CustomOrderButton>
+    </androidx.cardview.widget.CardView>
 
 
     <androidx.constraintlayout.widget.Guideline

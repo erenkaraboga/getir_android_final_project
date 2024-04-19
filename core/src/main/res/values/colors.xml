@@ -8,5 +8,7 @@
     <color name="product_item_border">#F2F0FA</color>
     <color name="dark">#191919</color>
     <color name="text_secondary">#697488</color>
+    <color name="french_gray">#bbbfc8</color>
+
 
 </resources>
