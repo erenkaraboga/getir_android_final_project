@@ -57,4 +57,7 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation(project(":features:product_detail"))
     implementation(project(":features:basket"))
+
+    //Shimmer
+    implementation ("com.facebook.shimmer:shimmer:0.5.0")
 }
