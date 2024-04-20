@@ -11,6 +11,7 @@ import com.getir.core.SharedViewModel
 import com.getir.core.common.constants.ToolBarType
 import com.getir.core.common.ui.CustomOrderButton
 import com.getir.core.common.ui.CustomQuantityButtonDetail
+import com.getir.core.domain.extensions.getDescription
 import com.getir.core.domain.extensions.getImageUrl
 import com.getir.core.domain.models.Product
 import com.getir.product_detail.databinding.FragmentProductDetailBinding
@@ -55,7 +56,7 @@ class ProductDetailFragment : Fragment() {
             selectedProduct?.let {
                 product = it
                 binding.tvProductName.text = it.name
-                binding.tvAttribute.text = it.attribute
+                binding.tvAttribute.text = product.getDescription()
                 binding.tvPrice.text = it.priceText
                 Glide.with(this)
                     .load(product.getImageUrl())
