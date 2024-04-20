@@ -72,17 +72,6 @@
 
 
 
-    <com.getir.core.common.ui.CustomQuantityButtonDetail
-        android:id="@+id/customQuantityButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent">
-
-    </com.getir.core.common.ui.CustomQuantityButtonDetail>
 
     <View
         android:id="@+id/shadowView"
@@ -96,7 +85,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cvButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft"
         app:layout_constraintEnd_toEndOf="@id/guidelineRight"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -111,10 +100,22 @@
             app:customButtonText = "Sepete Ekle"
             app:cardElevation="0dp"
             app:strokeWidth="0dp"
+            android:visibility="visible"
             app:isBasket="false"
             android:layout_height="wrap_content">
 
         </com.getir.core.common.ui.CustomOrderButton>
+
+        <com.getir.core.common.ui.CustomQuantityButtonDetail
+            android:id="@+id/customQuantityButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginVertical="10dp"
+            android:visibility="gone"
+>
+
+        </com.getir.core.common.ui.CustomQuantityButtonDetail>
     </androidx.cardview.widget.CardView>
 
 
