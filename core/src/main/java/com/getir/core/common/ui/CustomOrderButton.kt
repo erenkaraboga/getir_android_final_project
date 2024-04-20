@@ -1,5 +1,6 @@
 package com.getir.core.common.ui
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Paint
@@ -57,8 +58,19 @@ class CustomOrderButton @JvmOverloads constructor(
     }
 
     fun setAmount(amount: Double) {
-        "₺${amount.twoDigit}".also { tvPrice.text = it }
-        "₺${(amount * 1.5).twoDigit}".also { tvOlderPrice.text = it }
+        val newPrice = "₺${amount.twoDigit}"
+        val oldPrice = "₺${(amount * 1.5).twoDigit}"
+
+        val tvPriceAnimator = ObjectAnimator.ofFloat(tvPrice, "scaleX", 1f, 1.2f, 1f)
+        tvPriceAnimator.duration = 500
+        tvPriceAnimator.start()
+
+        val tvOlderPriceAnimator = ObjectAnimator.ofFloat(tvOlderPrice, "scaleX", 1f, 1.2f, 1f)
+        tvOlderPriceAnimator.duration = 500
+        tvOlderPriceAnimator.start()
+
+        tvPrice.text = newPrice
+        tvOlderPrice.text = oldPrice
     }
 
     fun setButtonClickListener(listener: ButtonClickedListener) {

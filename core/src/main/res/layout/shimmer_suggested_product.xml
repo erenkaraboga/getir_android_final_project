@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:columnCount="3"
-    android:rowCount="3"
+    android:columnCount="4"
+    android:rowCount="4"
     android:layout_height="match_parent">
     <include layout="@layout/shimmer_product_list_item"></include>
     <include layout="@layout/shimmer_product_list_item"></include>
