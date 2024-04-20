@@ -22,7 +22,11 @@ class ProductDetailFragment : Fragment() {
     private lateinit var product: Product
     private lateinit var binding: FragmentProductDetailBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentProductDetailBinding.inflate(inflater)
         return binding.root
     }
@@ -35,7 +39,8 @@ class ProductDetailFragment : Fragment() {
 
     private fun observeViewModels() {
         sharedViewModel.cartItems.observe(viewLifecycleOwner) { cartItems ->
-            val existingProduct = cartItems.find { it.id == sharedViewModel.selectedProduct.value?.id }
+            val existingProduct =
+                cartItems.find { it.id == sharedViewModel.selectedProduct.value?.id }
             existingProduct?.let {
                 binding.customQuantityButton.setQuantity(it.quantity)
                 if (it.quantity > 0) {
@@ -72,7 +77,8 @@ class ProductDetailFragment : Fragment() {
     }
 
     private fun setListeners() {
-        binding.customQuantityButton.setOnQuantityChangeListener(object : CustomQuantityButtonDetail.OnQuantityChangeListener {
+        binding.customQuantityButton.setOnQuantityChangeListener(object :
+            CustomQuantityButtonDetail.OnQuantityChangeListener {
             override fun onQuantityIncreased(quantity: Int) {
                 sharedViewModel.addToCart(product)
             }
@@ -81,7 +87,7 @@ class ProductDetailFragment : Fragment() {
                 sharedViewModel.removeFromCart(product)
             }
         })
-        binding.btnCart.setButtonClickListener(object: CustomOrderButton.ButtonClickedListener{
+        binding.btnCart.setButtonClickListener(object : CustomOrderButton.ButtonClickedListener {
             override fun onButtonClicked() {
                 sharedViewModel.addToCart(product)
                 binding.customQuantityButton.setQuantity(1)

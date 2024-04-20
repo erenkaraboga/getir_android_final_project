@@ -121,13 +121,9 @@ class ProductListFragment : Fragment() {
             binding.shimmerSuggested.visibility = View.GONE
             binding.shimmerSuggested.stopShimmer()
             binding.rvSuggestedProduct.visibility = View.VISIBLE
-
         }
     }
-    private fun handleLoadingSuggested(loading: Boolean) {
-
-
-    }
+    private fun handleLoadingSuggested(loading: Boolean) {}
 
     private fun setUpProductList() {
         productList = binding.rvProduct
@@ -149,8 +145,6 @@ class ProductListFragment : Fragment() {
     }
 
     override fun onResume() {
-        //to refresh recyclerviews for change and scroll older position
-
         sharedViewModel.productItems.value?.let { productAdapter.setItems(it) }
         sharedViewModel.suggestedProductItems.value?.let { suggestedAdapter.setItems(it) }
         binding.nestedScroll.post {
