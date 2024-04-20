@@ -51,10 +51,15 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 
+    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
+
+
+
+
+
+testImplementation ("androidx.arch.core:core-testing:2.1.0")
     //Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
@@ -68,5 +73,12 @@ dependencies {
     implementation ("com.airbnb.android:lottie:6.4.0")
 
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+
+
+    testImplementation ("junit:junit:4.13.2")
+    testImplementation ("org.mockito.kotlin:mockito-kotlin:4.1.0")
+    testImplementation ("com.google.truth:truth:1.1.3")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
 
 }
