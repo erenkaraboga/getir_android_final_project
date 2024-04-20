@@ -52,33 +52,31 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
 
-    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
 
+    //Test
+    androidTestImplementation (libs.androidx.junit)
+    androidTestImplementation (libs.androidx.espresso.core)
+    testImplementation (libs.androidx.core.testing)
+    testImplementation (libs.junit)
+    testImplementation (libs.mockito.kotlin)
+    testImplementation (libs.truth)
+    testImplementation (libs.kotlinx.coroutines.test.v173)
+    testImplementation (libs.kotlinx.coroutines.test)
 
-
-
-
-testImplementation ("androidx.arch.core:core-testing:2.1.0")
     //Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
 
     //Retrofit
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
-    implementation ("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+    implementation(libs.okhttp)
+    implementation (libs.logging.interceptor)
 
-    implementation ("com.airbnb.android:lottie:6.4.0")
+    //Lottie
+    implementation (libs.lottie)
 
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
-    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
-
-
-    testImplementation ("junit:junit:4.13.2")
-    testImplementation ("org.mockito.kotlin:mockito-kotlin:4.1.0")
-    testImplementation ("com.google.truth:truth:1.1.3")
-    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    //Glide
+    implementation (libs.glide)
 
 }

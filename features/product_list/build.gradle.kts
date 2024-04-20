@@ -45,7 +45,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-    implementation(project(":core"))
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -54,10 +54,13 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
 
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
-    implementation(project(":features:product_detail"))
-    implementation(project(":features:basket"))
+    //Glide
+    implementation (libs.glide)
 
     //Shimmer
-    implementation ("com.facebook.shimmer:shimmer:0.5.0")
+    implementation (libs.shimmer)
+
+
+    implementation(project(":core"))
+
 }
