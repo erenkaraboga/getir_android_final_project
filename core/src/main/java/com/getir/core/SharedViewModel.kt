@@ -160,6 +160,16 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
 
     }
 
+    fun canNavigateBasket(): Boolean {
+        val cartAmount = _cartAmount.value
+        return cartAmount != null && cartAmount > 0
+    }
+
+    fun isDeleteButtonActive(): Boolean {
+        val cartAmount = _cartAmount.value
+        return cartAmount != null && cartAmount > 0
+    }
+
     fun getProducts() {
         if (_productState.value is ProductViewState.Success) return
         viewModelScope.launch {

@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
     tools:context=".BasketFragment">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScroll"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F5F5F5"
-        app:layout_constraintBottom_toTopOf="@+id/cvButton"
         android:layout_marginBottom="100dp"
-        android:layout_width="match_parent">
+        android:background="#F5F5F5"
+        app:layout_constraintBottom_toTopOf="@+id/cvButton">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -23,10 +22,10 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvProduct"
                 android:layout_width="0dp"
-                android:background="@color/white"
                 android:layout_height="match_parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
@@ -35,27 +34,25 @@
                 android:id="@+id/tvSuggested"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="14dp"
                 android:fontFamily="@font/open_sans_semi_bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:text="Önerilen Ürünler"
                 android:textColor="@color/dark"
                 android:textSize="12sp"
-                app:layout_constraintTop_toBottomOf="@+id/rvProduct"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="14dp"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvProduct" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSuggestedProduct"
                 android:layout_width="0dp"
-                android:background="@color/white"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvSuggested"
-
-                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="10dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSuggested"
                 app:layout_constraintVertical_bias="0.0" />
 
             <androidx.constraintlayout.widget.Guideline
@@ -65,13 +62,11 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_begin="20dp" />
 
-
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.core.widget.NestedScrollView>
+
     <View
         android:id="@+id/shadowView"
         android:layout_width="0dp"
@@ -80,26 +75,27 @@
         app:layout_constraintBottom_toTopOf="@+id/cvButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cvButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.getir.core.common.ui.CustomOrderButton
             android:id="@+id/btnCart"
             android:layout_width="match_parent"
-            app:cardCornerRadius="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
-            app:customButtonText = "Siparişi Tamamla"
+            app:cardCornerRadius="0dp"
             app:cardElevation="0dp"
-            app:strokeWidth="0dp"
+            app:customButtonText="Siparişi Tamamla"
             app:isBasket="true"
-            android:layout_height="wrap_content">
+            app:strokeWidth="0dp">
 
         </com.getir.core.common.ui.CustomOrderButton>
     </androidx.cardview.widget.CardView>
