@@ -151,7 +151,7 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
         _isOrdered.value=false
     }
 
-    private fun setLoading(isLoading: Boolean) {
+    fun setLoading(isLoading: Boolean) {
         _productState.value = ProductViewState.Loading(isLoading)
 
     }
