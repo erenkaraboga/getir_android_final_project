@@ -36,25 +36,25 @@ class CustomToolBar @JvmOverloads constructor(
 
         when (type) {
             ToolBarType.PRODUCT_LIST -> {
-                setTitle("Product List")
+                setTitle(context.getString(R.string.products))
                 btnClose.fadeOut(fadeDuration)
                 btnJunk.fadeOut(fadeDuration)
                 btnCart.fadeIn(fadeDuration)
             }
             ToolBarType.PRODUCT_DETAIL -> {
-                setTitle("Product Detail")
+                setTitle(context.getString(R.string.product_detail))
                 btnClose.fadeIn(fadeDuration)
                 btnCart.fadeOut(fadeDuration)
                 btnJunk.fadeOut(fadeDuration)
             }
             ToolBarType.PRODUCT_DETAIL_BASKET -> {
-                setTitle("Product Detail")
+                setTitle(context.getString(R.string.product_detail))
                 btnClose.fadeIn(fadeDuration)
                 btnCart.fadeIn(fadeDuration)
                 btnJunk.fadeOut(fadeDuration)
             }
             ToolBarType.BASKET -> {
-                setTitle("Basket")
+                setTitle(context.getString(R.string.myBasket))
                 btnClose.fadeIn(fadeDuration)
                 btnJunk.fadeIn(fadeDuration)
                 btnCart.fadeOut(fadeDuration)
