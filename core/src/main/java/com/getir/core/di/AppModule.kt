@@ -17,11 +17,7 @@ object AppModule {
     @Provides
     fun provideGson() = Gson()
 
-
-
     @Provides
     @Singleton
     fun provideProductMapper(): ProductMapper = ProductMapper()
-
-
 }

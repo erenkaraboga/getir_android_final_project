@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="@color/main_bg"
     tools:context=".BasketFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="100dp"
-        android:background="#F5F5F5"
+        android:background="@color/main_bg"
         app:layout_constraintBottom_toTopOf="@+id/cvButton">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,7 +37,7 @@
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="14dp"
                 android:fontFamily="@font/open_sans_semi_bold"
-                android:text="Önerilen Ürünler"
+                android:text="@string/suggested_products"
                 android:textColor="@color/dark"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -93,7 +93,7 @@
             android:layout_marginBottom="20dp"
             app:cardCornerRadius="0dp"
             app:cardElevation="0dp"
-            app:customButtonText="Siparişi Tamamla"
+            app:customButtonText="@string/finish_order"
             app:isBasket="true"
             app:strokeWidth="0dp">
 

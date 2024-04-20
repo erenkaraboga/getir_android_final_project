@@ -1,76 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ProductDetailFragment">
-
-
-
 
     <ImageView
         android:id="@+id/ivProductImage"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="@id/guidelineRight"
-        app:layout_constraintTop_toTopOf="@id/guidelineTop"
-        android:layout_marginTop="20dp" />
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="@id/guidelineTop" />
 
     <TextView
         android:id="@+id/tvPrice"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ellipsize="end"
         android:fontFamily="@font/open_sans_bold"
-        android:textColor="@color/color_primary"
-        android:text="0,00"
         android:gravity="center"
         android:maxLines="2"
-        android:ellipsize="end"
-        android:layout_marginTop="20dp"
+        android:text="@string/_0_00"
+        android:textColor="@color/color_primary"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/ivProductImage"
-        app:layout_constraintTop_toBottomOf="@id/ivProductImage"
         app:layout_constraintEnd_toEndOf="@+id/ivProductImage"
-        android:layout_height="wrap_content"
-        />
+        app:layout_constraintStart_toStartOf="@+id/ivProductImage"
+        app:layout_constraintTop_toBottomOf="@id/ivProductImage" />
 
     <TextView
         android:id="@+id/tvProductName"
         android:layout_width="0dp"
-        android:fontFamily="@font/open_sans_semi_bold"
-        android:textColor="@color/dark"
-        android:layout_marginHorizontal="20dp"
-        android:text="Product Name"
-        android:maxLines="2"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:ellipsize="end"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@id/tvPrice"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineRight"
         android:layout_height="wrap_content"
-        />
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/open_sans_semi_bold"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="@string/product_name"
+        android:textColor="@color/dark"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@id/tvPrice" />
 
     <TextView
         android:id="@+id/tvAttribute"
         android:layout_width="0dp"
-        android:fontFamily="@font/open_sans_semi_bold"
-        android:textColor="@color/text_secondary"
-        android:text="Attribute"
-        android:textSize="12sp"
-        android:layout_marginTop="4dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/open_sans_semi_bold"
         android:gravity="center"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@id/tvProductName"
+        android:text="@string/attribute"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/guidelineRight"
-        android:layout_height="wrap_content" />
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@id/tvProductName" />
 
-
-
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:dividerColor="@color/product_item_border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAttribute" />
 
 
     <View
@@ -86,23 +87,23 @@
         android:id="@+id/cvButton"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guidelineRight"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft">
 
         <com.getir.core.common.ui.CustomOrderButton
             android:id="@+id/btnCart"
             android:layout_width="match_parent"
-            app:cardCornerRadius="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
-            app:customButtonText = "Sepete Ekle"
-            app:cardElevation="0dp"
-            app:strokeWidth="0dp"
             android:visibility="visible"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="0dp"
+            app:customButtonText="@string/add_to_cart"
             app:isBasket="false"
-            android:layout_height="wrap_content">
+            app:strokeWidth="0dp">
 
         </com.getir.core.common.ui.CustomOrderButton>
 
@@ -112,8 +113,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginVertical="10dp"
-            android:visibility="gone"
->
+            android:visibility="gone">
 
         </com.getir.core.common.ui.CustomQuantityButtonDetail>
     </androidx.cardview.widget.CardView>
@@ -139,7 +139,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="30dp" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

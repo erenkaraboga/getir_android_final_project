@@ -2,6 +2,7 @@ package com.getir.core.common.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.animation.Animation
@@ -22,15 +23,18 @@ class CustomOrderButton @JvmOverloads constructor(
     private val orderLayout: LinearLayout
     private val buttonText: TextView
     private val tvPrice: TextView
+    private val tvOlderPrice: TextView
     private val cvOrder: CardView
     private var buttonClickedListener: ButtonClickedListener? = null
+
     init {
         LayoutInflater.from(context).inflate(R.layout.custom_order_button, this, true)
         orderLayout = findViewById(R.id.cvPrice)
         buttonText = findViewById(R.id.tvText)
-        tvPrice= findViewById(R.id.tvPrice)
-        cvOrder= findViewById(R.id.cvOrder)
-        cvOrder.setOnClickListener{
+        tvPrice = findViewById(R.id.tvPrice)
+        cvOrder = findViewById(R.id.cvOrder)
+        tvOlderPrice = findViewById(R.id.tvOlderPrice)
+        cvOrder.setOnClickListener {
             buttonClickedListener?.onButtonClicked()
         }
         attrs?.let { retrieveAttributes(attrs) }
@@ -49,13 +53,21 @@ class CustomOrderButton @JvmOverloads constructor(
     private fun setButton(isBasket: Boolean, text: String) {
         orderLayout.visibility = if (isBasket) VISIBLE else GONE
         buttonText.text = text
+        setStrikeThrough(tvOlderPrice)
     }
-      fun setAmount(amount : Double){
+
+    fun setAmount(amount: Double) {
         "₺${amount.twoDigit}".also { tvPrice.text = it }
+        "₺${(amount * 1.5).twoDigit}".also { tvOlderPrice.text = it }
     }
+
     fun setButtonClickListener(listener: ButtonClickedListener) {
         buttonClickedListener = listener
     }
+    private fun setStrikeThrough(textView: TextView) {
+        textView.paintFlags = textView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+    }
+
     interface ButtonClickedListener {
         fun onButtonClicked()
     }

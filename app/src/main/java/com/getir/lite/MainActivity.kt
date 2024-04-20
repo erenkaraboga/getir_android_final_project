@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         setListeners()
         setUpNavigation()
         setUpObservers()
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 
     private fun setUpObservers() {
@@ -41,12 +41,13 @@ class MainActivity : AppCompatActivity() {
             binding.customToolBar.setAmount(it)
         }
 
-        sharedViewModel.isOrdered.observe(this) {isOrdered ->
-            if (isOrdered){
+        sharedViewModel.isOrdered.observe(this) { isOrdered ->
+            if (isOrdered) {
                 restartActivity()
             }
         }
     }
+
     private fun setUpNavigation() {
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.navHostFragment) as NavHostFragment
@@ -63,8 +64,8 @@ class MainActivity : AppCompatActivity() {
                 navController.popBackStack()
             }
 
-            setDeleteButtonClickListener{
-                if(sharedViewModel.isDeleteButtonActive()){
+            setDeleteButtonClickListener {
+                if (sharedViewModel.isDeleteButtonActive()) {
                     showDialog()
                 }
             }
@@ -72,8 +73,9 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
     private fun navigateToBasketFragment() {
-        if(sharedViewModel.canNavigateBasket()){
+        if (sharedViewModel.canNavigateBasket()) {
             val navOptions = NavOptions.Builder()
                 .setEnterAnim(com.getir.core.R.anim.slide_in)
                 .setPopEnterAnim(com.getir.core.R.anim.slide_in)
@@ -85,18 +87,24 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-    private fun showDialog(){
-        DialogHelper.showDialog(context = this, object : AlertDialogListener {
-            override fun onPositiveClicked(dialog: DialogInterface) {
-                restartActivity()
-            }
 
-            override fun onNegativeClicked(dialog: DialogInterface) {
-                dialog.dismiss()
-                dialog.cancel()
-            }
-        } ,getString(com.getir.core.R.string.are_you_sure_clear_basket),)
+    private fun showDialog() {
+        DialogHelper.showDialog(
+            context = this,
+            object : AlertDialogListener {
+                override fun onPositiveClicked(dialog: DialogInterface) {
+                    restartActivity()
+                }
+
+                override fun onNegativeClicked(dialog: DialogInterface) {
+                    dialog.dismiss()
+                    dialog.cancel()
+                }
+            },
+            getString(com.getir.core.R.string.are_you_sure_clear_basket),
+        )
     }
+
     private fun restartActivity() {
         val intent = intent
         finish()

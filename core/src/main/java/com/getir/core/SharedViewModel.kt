@@ -45,7 +45,6 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
     val isOrdered: LiveData<Boolean> get() = _isOrdered
 
 
-
     private val _cartItems = MutableLiveData<MutableList<Product>>()
     val cartItems: LiveData<MutableList<Product>> = _cartItems
 
@@ -114,8 +113,6 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
 
     }
 
-
-
     private fun getBasketItems()  {
         val basketItems = mutableListOf<Product>()
         _cartItems.value?.forEach { product ->
@@ -157,7 +154,6 @@ class SharedViewModel @Inject constructor(private val getProductsUseCase: GetPro
     }
     private fun setLoadingSuggested(isLoading: Boolean) {
         _suggestedProductState.value = SuggestedProductViewState.Loading(isLoading)
-
     }
 
     fun canNavigateBasket(): Boolean {
