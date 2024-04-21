@@ -53,6 +53,23 @@
     <img alt="Icon" src="https://github.com/erenkaraboga/getir_android_final_project/assets/74095539/d6dcbdbb-7f24-4578-9375-cbe19227cc03" />
 </div>
 
+## Module Explaination
+
+App
+
+* The app module contains the Hilt app module, which includes the necessary Hilt API, and it also contains the main activity class. The main activity class listens to changes in the toolbar type, the total amount in the shopping cart, and whether the order has been placed. The toolbar is defined once within this class. The main navigation graph is located here, and the navigation graphs of feature modules are included in this activity.
+
+Core
+
+* The core module of the application is designed to be usable by other modules. Constants and enums for the entire application are within the core module. Additionally, the core module includes custom UI components used by other modules of the application. Moreover, the class necessary for dialogs is located here, and the Resource class for fetching data from the internet is defined within this module as well.
+
+* This module also handles the application's internet-related connections. Folder structure follows Clean Architecture principles. Under the Data layer, within the remote folder, there are api service and dto folders. The Data layer also includes the implementation of the Product Repository class. The DI (Dependency Injection) folder is where Hilt configurations are made. Dependencies for Mapper, Retrofit, UseCase, and network modules are bound here. Http Logging Interceptor usage is also found under the Network Module.
+
+* In the Domain layer, there are folders that connect the application's core and feature modules. Extensions specific to the application, such as the Mapper Dto to Model mapper class, are defined here. Model classes used by feature modules are also located here, along with the interface part of the Repository. Since feature modules are closer to the application, Use Case implementation is done here.
+
+* As the application follows the single activity multi-fragment approach, and there's significant connection and synchronization between screens, a single ViewModel is used, which is also located here.
+
+
 ## List of Positives
 
 - ✅ Completed
