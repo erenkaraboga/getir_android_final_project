@@ -50,7 +50,7 @@
 
 ## App Architecture
 <div align="center">
-    <img alt="Icon" src="https://github.com/erenkaraboga/getir_android_final_project/assets/74095539/456d78d8-d5f7-4bc1-9d66-f4d47bc00adb" />
+    <img alt="Icon" src="https://github.com/erenkaraboga/getir_android_final_project/assets/74095539/d6dcbdbb-7f24-4578-9375-cbe19227cc03" />
 </div>
 
 ## List of Positives
@@ -69,4 +69,8 @@
 
 ## Demo Video
 
-[Demo Video](https://kotlinlang.org/)
+[Demo Video](https://youtu.be/YW1R92lEpDE)
+
+
+
+
