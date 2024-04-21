@@ -1,3 +1,6 @@
+
+
+
 <div align="center">
     <img alt="Icon" src="https://github.com/erenkaraboga/getir_android_final_project/assets/74095539/be288011-8112-4b78-aacb-64c106311313" width="200" />
 </div>
@@ -7,15 +10,21 @@
 </h2>
 <p align="center">
     Getir Lite is a simplified version of the Getir app.
-  
 </p>
 
 <div align="center">
-    <img alt="Icon" src="https://github.com/erenkaraboga/getir_android_final_project/assets/74095539/c938eb37-7227-401a-85f2-681ce67d50a7" />
+    <img alt="Icon" src="https://github.com/erenkaraboga/StockListingApp/assets/74095539/70bdb8a6-d5cd-440d-a74e-deff2730e786" />
 </div>
 
+## Table of Contents
 
-# Project Characteristics 
+1. [Project Characteristics](#project-characteristics)
+2. [Project Decisions](#project-decisions)
+3. [App Architecture](#app-architecture)
+4. [List of Positives](#list-of-positives)
+5. [Demo Video](#demo-video)
+
+## Project Characteristics 
 * [Kotlin](https://kotlinlang.org/)
 * [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 * [Multi Module Setup](https://developer.android.com/topic/modularization)
@@ -26,7 +35,7 @@
 * [Version Catalogs](https://developer.android.com/build/migrate-to-catalogs)
 * [Unit Testing](https://developer.android.com/training/testing/local-tests)
 
-# Project Decisions
+## Project Decisions
   <ul>
     <li><strong>Kotlin Usage:</strong> The project utilizes Kotlin as its primary language, leveraging its expressive power and productivity benefits.</li>
     <li><strong>Clean Architecture Approach:</strong> Following clean architecture principles, the project ensures modularity, independence, and testability of code components.</li>
@@ -38,3 +47,26 @@
     <li><strong>Version Catalogs:</strong> Version catalogs centralize the management of project dependencies and versions, facilitating dependency updates and version compatibility across modules, thus enhancing modularity.</li>
     <li><strong>Unit Testing:</strong> Encouraging the use of unit tests, the project enhances software accuracy and reliability, ultimately improving code quality.</li>
   </ul>
+
+## App Architecture
+<div align="center">
+    <img alt="Icon" src="https://github.com/erenkaraboga/getir_android_final_project/assets/74095539/456d78d8-d5f7-4bc1-9d66-f4d47bc00adb" />
+</div>
+
+## List of Positives
+
+- ✅ Completed
+
+| Feature                                                   | APP |
+|-----------------------------------------------------------|:---:|
+| MVVM                                                      |  ✅  |
+| Custom Views                                              |  ✅  |
+| Recommend Products                                        |  ✅  |  
+| Animations                                                |  ✅  | 
+| Unit Tests                                                |  ✅  | 
+| Modular Approach                                          |  ✅  | 
+| Hilt for DI                                               |  ✅  | 
+
+## Demo Video
+
+[Demo Video](https://kotlinlang.org/)
