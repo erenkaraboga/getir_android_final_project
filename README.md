@@ -23,7 +23,7 @@
 3. [App Architecture](#app-architecture)
 4. [Module Explanation](#module-explanation)
 5. [Testing](#testing)
-6. [Branches Explanation](#testing)
+6. [Branches Explanation](#branches-explanation)
 7. [Developer Notes](#developer-notes)
 8. [List of Positives](#list-of-positives)
 9. [Demo Video and APK](#demo-video)
@@ -161,6 +161,11 @@ In the project, different branches have been used for various topics, and later 
 ## Demo Video
 
 [Demo Video](https://youtu.be/YW1R92lEpDE)
+
+## Release Apk
+[Get Release APK](https://github.com/erenkaraboga/getir_android_final_project/releases/download/GetirLite/app-release.apk)
+
+
 
 
 
