@@ -82,7 +82,7 @@
                 android:src="@drawable/ic_plus_quantity"
                 android:visibility="visible"
                 android:layout_height="50dp">
-                >
+
             </ImageView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
