@@ -84,6 +84,42 @@ Basket
  * At the bottom of the screen, there is a list of recommended products as a bonus feature, and the user can also add or remove products from here in the same way. If the user's basket is not empty, they can choose to empty it.
  * When the user confirms their basket, a Toast message appears indicating the total amount, and the user is returned to the main module.
 
+## Testing
+
+### GetProductsUseCase Test
+
+The `GetProductsUseCase` is responsible for fetching products. Three different scenarios are tested:
+
+1. **Success Case**: Verifies the expected behavior when `getProducts()` function is called successfully. It ensures that the function returns the expected list of products.
+
+2. **HTTP Exception Error Case**: Tests the expected behavior when `getProducts()` function encounters an HTTP exception. It verifies that the function throws an HTTP exception as expected.
+
+3. **IO Exception Error Case**: Validates the expected behavior when `getProducts()` function encounters an I/O exception. It ensures that the function throws an I/O exception as expected.
+
+#### Test Cases
+
+- **check getProducts() success case**: Tests the successful execution of the `getProducts()` function.
+- **check getProducts() http exception error case**: Tests the behavior when `getProducts()` encounters an HTTP exception.
+- **check getProducts() io exception error case**: Tests the behavior when `getProducts()` encounters an I/O exception.
+
+### SharedViewModel Test
+
+The `SharedViewModel` is a ViewModel responsible for managing UI-related data in the home screen of an Android application. The test cases cover various scenarios to ensure the correct behavior of the ViewModel's functions.
+
+#### Test Cases
+
+1. **getProductsUseCase emits success**: Verifies the correct handling of a successful response from the `getProducts()` function of the `GetProductsUseCase`. It simulates the emission of a successful resource and checks if the ViewModel handles it properly.
+
+2. **getProductsUseCase emits error**: Tests the ViewModel's behavior when the `getProducts()` function of the `GetProductsUseCase` returns an error. It simulates the emission of an error resource and verifies if the ViewModel handles it correctly.
+
+3. **getProducts emits loading**: Checks the ViewModel's response to the loading state when the `getProducts()` function is called. It simulates the emission of a loading resource and ensures that the ViewModel handles it appropriately.
+
+4. **verify setLoading function called with isLoading=true**: Validates the ViewModel's behavior when the `setLoading(true)` function is called. It verifies if the ViewModel correctly sets the loading state to true.
+
+5. **verify setLoading function called with isLoading=false**: Validates the ViewModel's behavior when the `setLoading(false)` function is called. It verifies if the ViewModel correctly sets the loading state to false.
+
+
+
 ## List of Positives
 
 - ✅ Completed
