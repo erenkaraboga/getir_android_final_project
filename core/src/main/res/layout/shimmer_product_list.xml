@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="horizontal"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:columnCount="4"
+    android:rowCount="4">
 
-    <include layout="@layout/shimmer_product_list_item"></include>
-    <include layout="@layout/shimmer_product_list_item"></include>
-    <include layout="@layout/shimmer_product_list_item"></include>
-    <include layout="@layout/shimmer_product_list_item"></include>
-    <include layout="@layout/shimmer_product_list_item"></include>
-</LinearLayout>
+    <include layout="@layout/shimmer_product_list_item" />
+    <include layout="@layout/shimmer_product_list_item" />
+    <include layout="@layout/shimmer_product_list_item" />
+    <include layout="@layout/shimmer_product_list_item" />
+    <include layout="@layout/shimmer_product_list_item" />
+    <include layout="@layout/shimmer_product_list_item" />
+    <include layout="@layout/shimmer_product_list_item" />
+    <include layout="@layout/shimmer_product_list_item" />
+    <include layout="@layout/shimmer_product_list_item" />
+    <include layout="@layout/shimmer_product_list_item" />
+    <include layout="@layout/shimmer_product_list_item" />
+    <include layout="@layout/shimmer_product_list_item" />
+
+
+</GridLayout>
