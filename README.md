@@ -118,7 +118,13 @@ The `SharedViewModel` is a ViewModel responsible for managing UI-related data in
 
 5. **verify setLoading function called with isLoading=false**: Validates the ViewModel's behavior when the `setLoading(false)` function is called. It verifies if the ViewModel correctly sets the loading state to false.
 
+## Branches Explanation 
 
+
+## Developer Notes
+ * It has been instructed that in the application, if there are no products in the cart, the user should not be able to navigate to the cart. If the user does not have any items in the cart, they cannot navigate to the cart from the product list or detail page. However, if the cart is populated, and the user navigates to it, the cart is emptied one by one, allowing the user to optionally select from suggested products without the screen being closed.
+ * In such an application, since both the elements of the product list and suggested product list can change continuously, and there are RecyclerViews in both the product list and basket screens, these elements need to be updated without fetching data from the internet again. Therefore, these lists are maintained locally in the viewmodel class. Due to the limitations of the task provided by the Getir, no local database setup has been implemented. Adding a local database could also be a reasonable option.
+ * Mockito has been used for the application's testing, and manual mock data has been utilized. You can find the MockHelper class under the utils section within the Core module.
 
 ## List of Positives
 
