@@ -21,8 +21,13 @@
 1. [Project Characteristics](#project-characteristics)
 2. [Project Decisions](#project-decisions)
 3. [App Architecture](#app-architecture)
-4. [List of Positives](#list-of-positives)
-5. [Demo Video](#demo-video)
+4. [Module Explanation](#module-explanation)
+5. [Testing](#testing)
+6. [Branches Explanation](#testing)
+7. [Developer Notes](#developer-notes)
+8. [List of Positives](#list-of-positives)
+9. [Demo Video and APK](#demo-video)
+
 
 ## Project Characteristics 
 * [Kotlin](https://kotlinlang.org/)
@@ -53,7 +58,7 @@
     <img alt="Icon" src="https://github.com/erenkaraboga/getir_android_final_project/assets/74095539/d6dcbdbb-7f24-4578-9375-cbe19227cc03" />
 </div>
 
-## Module Explaination
+## Module Explanation
 
 App
 
@@ -119,7 +124,20 @@ The `SharedViewModel` is a ViewModel responsible for managing UI-related data in
 5. **verify setLoading function called with isLoading=false**: Validates the ViewModel's behavior when the `setLoading(false)` function is called. It verifies if the ViewModel correctly sets the loading state to false.
 
 ## Branches Explanation 
+In the project, different branches have been used for various topics, and later merged into the development branch. Each branch has a merge description. You can find the relevant merge descriptions in the list below.
 
+* [@dagger hilt configuration](https://github.com/erenkaraboga/getir_android_final_project/pull/1)
+* [@version catalog configuration](https://github.com/erenkaraboga/getir_android_final_project/pull/2)
+* [@navigation graph](https://github.com/erenkaraboga/getir_android_final_project/pull/3)
+* [@app modularization](https://github.com/erenkaraboga/getir_android_final_project/pull/4)
+* [@core module network config](https://github.com/erenkaraboga/getir_android_final_project/pull/5)
+* [@custom basket button](https://github.com/erenkaraboga/getir_android_final_project/pull/6)
+* [@custom toolbar](https://github.com/erenkaraboga/getir_android_final_project/pull/7)
+* [@custom quantity button detail ](https://github.com/erenkaraboga/getir_android_final_project/pull/8)
+* [@features sharedviewmodel flow connection](https://github.com/erenkaraboga/getir_android_final_project/pull/9)
+* [@product list UI elements](https://github.com/erenkaraboga/getir_android_final_project/pull/10)
+* [@unit tests](https://github.com/erenkaraboga/getir_android_final_project/pull/11)
+* [@code cleanup](https://github.com/erenkaraboga/getir_android_final_project/pull/12)
 
 ## Developer Notes
  * It has been instructed that in the application, if there are no products in the cart, the user should not be able to navigate to the cart. If the user does not have any items in the cart, they cannot navigate to the cart from the product list or detail page. However, if the cart is populated, and the user navigates to it, the cart is emptied one by one, allowing the user to optionally select from suggested products without the screen being closed.
