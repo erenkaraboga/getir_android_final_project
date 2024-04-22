@@ -4,12 +4,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="@color/main_bg"
     android:layout_width="match_parent">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F5F5F5"
+        android:background="@color/main_bg"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".ProductListFragment">
 
@@ -36,13 +37,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            >
+            app:layout_constraintVertical_bias="0.0">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <include layout="@layout/shimmer_product_list"></include>
+                <include layout="@layout/shimmer_product_list"/>
 
             </LinearLayout>
 
@@ -55,6 +56,7 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,15 +76,16 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shimmerSuggested"
-            app:layout_constraintVertical_bias="0.0"
-            >
+            app:layout_constraintVertical_bias="0.0">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <include layout="@layout/shimmer_suggested_product"></include>
+                <include layout="@layout/shimmer_suggested_product"/>
 
             </LinearLayout>
+
 
 
         </com.facebook.shimmer.ShimmerFrameLayout>

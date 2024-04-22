@@ -4,4 +4,6 @@
     <string name="select_product">Ürün Seçiniz</string>
     <string name="are_you_approve_order">Siparişinizi onaylamak istiyor musunuz ?</string>
     <string name="order_approved">Sipariş Alındı ₺%1$s</string>
+    <string name="suggested_products">Önerilen Ürünler</string>
+    <string name="finish_order">Siparişi Tamamla</string>
 </resources>

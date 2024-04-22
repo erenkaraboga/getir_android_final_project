@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.getir.core.R
+import com.getir.core.domain.extensions.getDescription
 import com.getir.core.domain.extensions.getImageUrl
 import com.getir.core.domain.models.Product
 import com.google.android.material.card.MaterialCardView
@@ -56,7 +57,7 @@ class CustomProductItem @JvmOverloads constructor(
             .into(imageView)
         priceTextView.text = product.priceText
         productNameTextView.text = product.name
-        attributeTextView.text = product.attribute
+        attributeTextView.text = product.getDescription()
         customQuantityButtonList.setQuantity(product.quantity)
         cardView.strokeColor = if (product.quantity > 0) primaryColor else borderColor
     }

@@ -3,7 +3,6 @@ package com.getir.product_list
 import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.getir.basket.ProductItemListener
 import com.getir.core.common.ui.CustomProductItem
 import com.getir.core.common.ui.CustomProductItemListener
 import com.getir.core.domain.models.Product
@@ -39,24 +38,24 @@ class ProductListAdapter(
 
         fun bind(item: Product) {
 
-                productItemView.setProduct(product = item)
-                productItemView.setListener(object :CustomProductItemListener{
-                    override fun onQuantityIncreased(quantity: Int, product: Product) {
-                        listener.onProductIncreased(quantity , product)
+            productItemView.setProduct(product = item)
+            productItemView.setListener(object : CustomProductItemListener {
+                override fun onQuantityIncreased(quantity: Int, product: Product) {
+                    listener.onProductIncreased(quantity, product)
 
-                    }
+                }
 
-                    override fun onQuantityDecreased(quantity: Int, product: Product) {
-                        listener.onProductDecreased(quantity , product)
+                override fun onQuantityDecreased(quantity: Int, product: Product) {
+                    listener.onProductDecreased(quantity, product)
 
-                    }
+                }
 
-                    override fun onProductClicked(product: Product) {
-                        listener.onProductClicked(product)
-                    }
+                override fun onProductClicked(product: Product) {
+                    listener.onProductClicked(product)
+                }
 
-                })
-            }
+            })
+        }
 
     }
 }

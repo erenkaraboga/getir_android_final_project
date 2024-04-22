@@ -10,3 +10,11 @@ fun Product.getImageUrl(): String {
         else -> ""
     }
 }
+
+fun Product.getDescription(): String {
+    return when {
+        shortDescription.isNotEmpty() -> shortDescription
+        attribute.isNotEmpty() -> attribute
+        else -> ""
+    }
+}

@@ -61,8 +61,6 @@ class BasketListAdapter(
 
     }
 }
-
-
 interface ProductItemListener {
     fun onProductClicked(product: Product)
     fun onProductDecreased(quantity: Int, product: Product)

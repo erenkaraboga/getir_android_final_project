@@ -16,7 +16,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.getir.basket.ProductItemListener
 import com.getir.core.SharedViewModel
 import com.getir.core.common.constants.NavigationRoute
 import com.getir.core.common.constants.ToolBarType
@@ -53,7 +52,7 @@ class ProductListFragment : Fragment() {
         listeners()
         setupObservers()
         init()
-        binding.rvProduct.isNestedScrollingEnabled = false
+
     }
 
     private fun setupObservers() {
@@ -126,10 +125,12 @@ class ProductListFragment : Fragment() {
     private fun handleLoadingSuggested(loading: Boolean) {}
 
     private fun setUpProductList() {
+        binding.rvProduct.isNestedScrollingEnabled = false
         productList = binding.rvProduct
         productList.layoutManager = GridLayoutManager(requireContext(), 3)
         productAdapter = createProductListAdapter()
         productList.adapter = productAdapter
+        binding.rvProduct.isNestedScrollingEnabled = false
     }
 
     private fun setUpSuggestedProductList() {

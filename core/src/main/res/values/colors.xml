@@ -9,6 +9,7 @@
     <color name="dark">#191919</color>
     <color name="text_secondary">#697488</color>
     <color name="french_gray">#bbbfc8</color>
+    <color name="main_bg">#F5F5F5</color>
 
 
 </resources>

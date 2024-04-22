@@ -40,7 +40,7 @@ class BasketFragment : Fragment() {
     private lateinit var suggestedAdapter: ProductSuggestedListAdapter
     private lateinit var suggestedProductList: RecyclerView
     private lateinit var cartItems: List<Product>
-    private  var cartAmount:Double = 0.0
+    private var cartAmount: Double = 0.0
 
 
     override fun onCreateView(
@@ -73,7 +73,8 @@ class BasketFragment : Fragment() {
             list?.let { suggestedAdapter.setItems(list) }
         }
         sharedViewModel.cartAmount.observe(viewLifecycleOwner) { amount ->
-            amount?.let { binding.btnCart.setAmount(it)
+            amount?.let {
+                binding.btnCart.setAmount(it)
                 cartAmount = amount
             }
         }
@@ -82,9 +83,10 @@ class BasketFragment : Fragment() {
     private fun setListeners() {
         binding.btnCart.setButtonClickListener(object : CustomOrderButton.ButtonClickedListener {
             override fun onButtonClicked() {
-                if (cartItems.isEmpty()){
-                    Toast.makeText(context, getString(R.string.select_product), Toast.LENGTH_SHORT).show()
-                }else{
+                if (cartItems.isEmpty()) {
+                    Toast.makeText(context, getString(R.string.select_product), Toast.LENGTH_SHORT)
+                        .show()
+                } else {
                     showDialog()
                 }
             }
@@ -170,9 +172,11 @@ class BasketFragment : Fragment() {
             context = context,
             object : AlertDialogListener {
                 override fun onPositiveClicked(dialog: DialogInterface) {
-                    Toast.makeText(context,
-                        getString(R.string.order_approved, cartAmount.twoDigit), Toast.LENGTH_LONG).show()
-                        sharedViewModel.setIsOrdered(true)
+                    Toast.makeText(
+                        context,
+                        getString(R.string.order_approved, cartAmount.twoDigit), Toast.LENGTH_LONG
+                    ).show()
+                    sharedViewModel.setIsOrdered(true)
                 }
 
                 override fun onNegativeClicked(dialog: DialogInterface) {

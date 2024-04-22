@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.getir.core.R
+import com.getir.core.domain.extensions.getDescription
 import com.getir.core.domain.extensions.getImageUrl
 import com.getir.core.domain.models.Product
 import com.google.android.material.card.MaterialCardView
@@ -55,11 +56,7 @@ class CustomProductItemBasket @JvmOverloads constructor(
             .into(imageView)
         priceTextView.text = product.priceText
         productNameTextView.text = product.name
-        attributeTextView.text = if (product.attribute != "") {
-            product.attribute
-        } else {
-           "Attribute"
-        }
+        attributeTextView.text = product.getDescription()
         customquantityButtonBasket.setQuantity(product.quantity)
 
     }
