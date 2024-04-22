@@ -69,6 +69,20 @@ Core
 
 * As the application follows the single activity multi-fragment approach, and there's significant connection and synchronization between screens, a single ViewModel is used, which is also located here.
 
+Product List  
+
+* On the product list module, there are two RecyclerViews, one horizontal and one vertical. This module uses a shared ViewModel to send requests and displays product items in the respective lists through the ProductAdapter. It also enables navigation to the product detail module when any item is clicked.
+Additionally, shimmer effect is utilized for loading products.
+
+Product Detail
+
+* In the product detail module, the details of the selected product from the product list page are displayed. Additionally, this module includes functionalities for adding the respective product to the cart or removing it from the cart."
+
+Basket
+
+ * In the basket module, the user can view the products they have selected from both the product detail and product list modules. If desired, the user can make changes to these products.
+ * At the bottom of the screen, there is a list of recommended products as a bonus feature, and the user can also add or remove products from here in the same way. If the user's basket is not empty, they can choose to empty it.
+ * When the user confirms their basket, a Toast message appears indicating the total amount, and the user is returned to the main module.
 
 ## List of Positives
 
